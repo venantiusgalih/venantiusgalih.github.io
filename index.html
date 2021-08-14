@@ -24,7 +24,7 @@
       //initializes plugin and stores the instance into a variable
       var instance = $('body').overlayScrollbars({ }).overlayScrollbars();
       instance.options({
-        className            : "os-theme-light",
+        className            : "os-theme-dark",
         scrollbars : {
             autoHide         : "move",
             autoHideDelay    : 400
@@ -35,7 +35,7 @@
 </head>
 
 <body>
-  <div id="flow">
+  <div id="flow" class="is-hidden-mobile">
     <span class="flow-1"></span>
     <span class="flow-2"></span>
     <span class="flow-3"></span>
