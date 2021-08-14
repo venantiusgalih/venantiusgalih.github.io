@@ -12,11 +12,17 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
   <!-- Bulma Version 0.8.x-->
   <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/cards.css">
   <link rel="stylesheet" type="text/css" href="css/personal.css">
   <script async type="text/javascript" src="js/bulma.js"></script>
 </head>
 
 <body>
+  <div id="flow">
+    <span class="flow-1"></span>
+    <span class="flow-2"></span>
+    <span class="flow-3"></span>
+  </div>
   <!-- Header -->
   <section class="hero is-fullheight is-fullheight-with-navbar">
     <div class="hero-body">
@@ -27,27 +33,27 @@
         <h2 class="subtitle is-3">
           Software Developer | Data Engineer
         </h2>
-        <div class="block">
-          <div class="is-inline-block">
+        <div class="buttons has-addons skills">
+          <a href="https://azure.microsoft.com/" target="_blank" class="button is-white">
             <figure class="image is-32x32">
-              <a href="https://azure.microsoft.com/" target="_blank"><img src="img/azure.png" alt="Azure"></a>
+              <img src="img/azure.png" alt="Azure">
             </figure>
-          </div>
-          <div class="is-inline-block">
+          </a>
+          <a href="https://databricks.com/" target="_blank" class="button is-white">
             <figure class="image is-32x32">
-              <a href="https://databricks.com/" target="_blank"><img src="img/databricks.png" alt="Azure"></a>
+              <img src="img/databricks.png" alt="Databricks">
             </figure>
-          </div>
-          <div class="is-inline-block">
+          </a>
+          <a href="https://www.python.org/" target="_blank" class="button is-white">
             <figure class="image is-32x32">
-              <a href="https://www.python.org/" target="_blank"><img src="img/python.png" alt="Python"></a>
+              <img src="img/python.png" alt="Python">
             </figure>
-          </div>
-          <div class="is-inline-block">
+          </a>
+          <a href="https://powerbi.microsoft.com/" target="_blank" class="button is-white">
             <figure class="image is-32x32">
-              <a href="https://powerbi.microsoft.com/" target="_blank"><img src="img/powerbi.png" alt="Power BI"></a>
+              <img src="img/powerbi.png" alt="Power BI">
             </figure>
-          </div>
+          </a>
         </div>
         <div class="buttons has-addons">
           <a href="https://www.linkedin.com/in/venantiusgalih" target="_blank" class="button is-link is-outlined is-info">
@@ -74,6 +80,19 @@
       </div>
     </div>
   </section>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <a href="https://bulma.io">
+          <img
+            src="https://bulma.io/images/made-with-bulma--semiblack.png"
+            alt="Made with Bulma"
+            width="256"
+            height="48">
+        </a>
+      </p>
+    </div>
+  </footer>
 </body>
 
 
