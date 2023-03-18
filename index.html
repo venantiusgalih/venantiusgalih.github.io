@@ -1,128 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Venantius Galih's Homepage</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" type="image/x-icon" href="img/logo.ico">
-  <link rel="icon" type="image/png" sizes="192x192" href="img/logo_192x192.png" >
-  <link rel="icon" type="image/png" sizes="48x48" href="img/logo_48x48.png" >
-  <link rel="icon" type="image/png" sizes="32x32" href="img/logo_32x32.png" >
-  <link rel="icon" type="image/png" sizes="16x16" href="img/logo_16x16.png" >
-  <!-- Fontawesome Version 6.0.0 self-hosted -->
-  <link href="css/fontawesome.min.css" rel="stylesheet">
-  <link href="css/regular.min.css" rel="stylesheet">
-  <link href="css/brands.min.css" rel="stylesheet">
-  <link href="css/solid.min.css" rel="stylesheet">
-  <!-- Bulma Version 0.8.x self-hosted -->
-  <link rel="stylesheet" type="text/css" href="css/bulma.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/bulma-tooltip.min.css">
-  <link rel="stylesheet" type="text/css" href="css/cards.min.css">
-  <link rel="stylesheet" type="text/css" href="css/personal.min.css">
-  <!-- <script async type="text/javascript" src="js/bulma.js"></script> -->
-  <!-- Overlay Scrollbar -->
-  <link type="text/css" href="css/OverlayScrollbars.min.css" rel="stylesheet"/>
-  <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="js/jquery.overlayScrollbars.min.js"></script>
-  <script>
-    $(function() {    
-      //initializes plugin and stores the instance into a variable
-      var instance = $('body').overlayScrollbars({ }).overlayScrollbars();
-      instance.options({
-        className            : "os-theme-dark",
-        scrollbars : {
-            autoHide         : "move",
-            autoHideDelay    : 400
-        }
-    })
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venantius Galih's Homepage 2</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/logo_192x192.png" >
+    <link rel="icon" type="image/png" sizes="48x48" href="img/logo_48x48.png" >
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo_32x32.png" >
+    <link rel="icon" type="image/png" sizes="16x16" href="img/logo_16x16.png" >
+    <!-- Bulma -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bulma Tooltips -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma-tooltip/1.0.2/bulma-tooltip.min.css" integrity="sha512-6MPIiuSkfRc7C714afaESji4FB1L5SatRp92mlvuVMWoePyJgGOP++h042ZHYfYdtI1ok4LyRnN7pAeDPIE5zw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- SimpleBar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.1/simplebar.min.css" integrity="sha512-rptDreZF629VL73El0GaBEH9tlYEKDJFUr+ysb+9whgSGbwYfGGA61dVtQFL0qC8/SZv/EQFW5JtwEFf+8zKYg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/flow.min.css">
+    <link rel="stylesheet" href="css/personal.min.css">
 </head>
-
 <body>
-  <div id="flow" class="is-hidden-touch">
-    <span class="flow-1"></span>
-    <span class="flow-2"></span>
-    <span class="flow-3"></span>
-  </div>
-  <!-- Section -->
-  <section class="hero is-fullheight is-fullheight-with-navbar">
-    <div class="hero-body">
-      <div class="container">Hello World! I am
-        <h1 class="title is-1">
-          Venantius Galih
-        </h1>
-        <h2 class="subtitle is-3">
-          Software Developer | Data Engineer
-        </h2>
-        <div class="buttons has-addons skills">
-          <a href="https://azure.microsoft.com/" target="_blank" class="button is-white has-tooltip-arrow" data-tooltip="Microsoft Azure">
-            <figure class="image is-32x32">
-              <img src="img/azure.svg" alt="Azure">
-            </figure>
-          </a>
-          <a href="https://databricks.com/" target="_blank" class="button is-white has-tooltip-arrow" data-tooltip="Databricks">
-            <figure class="image is-32x32">
-              <img src="img/databricks.svg" alt="Databricks">
-            </figure>
-          </a>
-          <a href="https://www.python.org/" target="_blank" class="button is-white has-tooltip-arrow" data-tooltip="Python">
-            <figure class="image is-32x32">
-              <img src="img/python.svg" alt="Python">
-            </figure>
-          </a>
-          <a href="https://powerbi.microsoft.com/" target="_blank" class="button is-white has-tooltip-arrow" data-tooltip="Microsoft Power BI">
-            <figure class="image is-32x32">
-              <img src="img/powerbi.svg" alt="Power BI">
-            </figure>
-          </a>
+    <!-- class body-all for enabling overlay scroll for all content in page -->
+    <div class="body-all" data-simplebar data-simplebar-auto-hide="true">
+        <div id="flow" class="is-hidden-touch">
+            <span class="flow-1"></span>
+            <span class="flow-2"></span>
+            <span class="flow-3"></span>
         </div>
-        <div class="buttons has-addons">
-          <a href="https://www.linkedin.com/in/venantiusgalih" target="_blank" class="button is-link is-outlined is-info">
-            <span class="icon">
-              <i class="fab fa-linkedin-in"></i>
-            </span>
-            <span>
-              LinkedIn
-            </span>
-          </a>
-          <a href="https://github.com/venantiusgalih/" target="_blank" class="button is-link is-outlined is-info">
-            <span class="icon">
-              <i class="fab fa-github"></i>
-            </span>
-            <span>Github</span>
-          </a>
-        </div>
-        <div class="content">
-          <p>Feel free to check my profile on 
-            <a href="https://glints.com/id/profile/public/527c86ed-34e5-4304-beed-5496a4b82bd6" target="_blank">Glints</a> 
-            and 
-            <span class="has-text-weight-semibold">find me</span> on 
-            <a href="https://kalibrr.com" target="_blank">Kalibrr</a>.
-          </p> 
-        </div>
-      </div>
+        <!-- Section -->
+        <section class="hero is-fullheight">
+            <div class="hero-body">
+                <div class="container">
+                    <p>
+                        Hello World! I am
+                    </p>
+                    <h1 class="title is-size-1">
+                        Venantius Galih
+                    </h1>
+                    <p class="subtitle is-size-4">
+                        Software Developer | Data Engineer
+                    </p>
+                    <div class="buttons has-addons skills">
+                        <a href="https://azure.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Microsoft Azure">
+                            <figure class="image is-32x32">
+                                <img src="img/azure.svg" alt="Azure">
+                            </figure>
+                        </a>
+                        <a href="https://databricks.com/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Databricks">
+                            <figure class="image is-32x32">
+                                <img src="img/databricks.svg" alt="Databricks">
+                            </figure>
+                        </a>
+                        <a href="https://www.python.org/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Python">
+                            <figure class="image is-32x32">
+                                <img src="img/python.svg" alt="Python">
+                            </figure>
+                        </a>
+                        <a href="https://powerbi.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Microsoft Power BI">
+                            <figure class="image is-32x32">
+                                <img src="img/powerbi.svg" alt="Power BI">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="buttons has-addons">
+                        <a href="https://www.linkedin.com/in/venantiusgalih" target="_blank" class="button is-link is-outlined is-info">
+                            <span class="icon"><i class="fab fa-linkedin-in"></i></span>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/venantiusgalih/" target="_blank" class="button is-link is-outlined is-info">
+                            <span class="icon"><i class="fab fa-github"></i></span>
+                            <span>Github</span>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <p>
+                            Feel free to check my profile on <a href="https://glints.com/id/profile/public/527c86ed-34e5-4304-beed-5496a4b82bd6" target="_blank">Glints</a> 
+                            and <span class="has-text-weight-semibold">find me</span> on <a href="https://kalibrr.com" target="_blank">Kalibrr</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="content has-text-centered">
+            <p>
+                <a href="https://bulma.io" target="_blank">
+                    <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="256" height="48">
+                </a>
+                <br>
+            </p>
+            Using the <a href="https://github.com/CreativeBulma/bulma-tooltip/" target="_blank">Bulma Extensions Tooltip</a> 
+            and <a href="https://grsmto.github.io/simplebar/" target="_blank">SimpleBar</a> <br>
+            Hosted in <a href="https://pages.github.com" target="_blank">Github Pages</a>
+            </div>
+        </footer>
     </div>
-  </section>
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        <a href="https://bulma.io" target="_blank">
-          <img
-          src="https://bulma.io/images/made-with-bulma--semiblack.png"
-          alt="Made with Bulma"
-          width="256"
-          height="48">
-        </a><br>
-        Using the <a href="https://wikiki.github.io/elements/tooltip/" target="_blank">Bulma Extensions Tooltip</a> 
-        and <a href="https://kingsora.github.io/OverlayScrollbars/" target="_blank">Overlay Scrollbar</a>.
-      </p>
-    </div>
-  </footer>
+    <!-- Script -->
+    <!-- SimpleBar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.1/simplebar.min.js" integrity="sha512-pnw039YCj58sPbPxVAzem8Z3dTgRgq0n6QJZDc+3PV2ScytsX6Jx0pMiLZRYofXshu4ChX6/rFFgebHQtK4UoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
-
-
 </html>
