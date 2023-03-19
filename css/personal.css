@@ -20,3 +20,6 @@ html{
     width: 100vw;
     height: 100vh;
 }
+.simplebar-scrollbar::before {
+    border-radius: 0;
+}
