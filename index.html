@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venantius Galih's Homepage 2</title>
+    <title>Venantius Galih's Homepage</title>
     <link rel="icon" type="image/png" sizes="192x192" href="img/logo_192x192.png" >
     <link rel="icon" type="image/png" sizes="48x48" href="img/logo_48x48.png" >
     <link rel="icon" type="image/png" sizes="32x32" href="img/logo_32x32.png" >
@@ -32,68 +32,136 @@
         <section class="hero is-fullheight">
             <div class="hero-body">
                 <div class="container">
-                    <p>
-                        Hello World! I am
-                    </p>
+                    <p>Hello World! I am</p>
                     <h1 class="title is-size-1">
                         Venantius Galih
                     </h1>
-                    <p class="subtitle is-size-4">
+                    <h3 class="subtitle is-size-4">
                         Software Developer | Data Engineer
-                    </p>
-                    <div class="buttons has-addons skills">
-                        <a href="https://azure.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Microsoft Azure">
-                            <figure class="image is-32x32">
-                                <img src="img/azure.svg" alt="Azure">
-                            </figure>
-                        </a>
-                        <a href="https://databricks.com/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Databricks">
-                            <figure class="image is-32x32">
-                                <img src="img/databricks.svg" alt="Databricks">
-                            </figure>
-                        </a>
-                        <a href="https://www.python.org/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Python">
-                            <figure class="image is-32x32">
-                                <img src="img/python.svg" alt="Python">
-                            </figure>
-                        </a>
-                        <a href="https://powerbi.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip-arrow" data-tooltip="Microsoft Power BI">
-                            <figure class="image is-32x32">
-                                <img src="img/powerbi.svg" alt="Power BI">
-                            </figure>
-                        </a>
-                    </div>
-                    <div class="buttons has-addons">
+                    </h3>
+                    <p class="is-hidden">Featured Skills:</p>
+                    <ul class="buttons has-addons skills">
+                        <li>
+                            <a href="https://azure.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Microsoft Azure">
+                                <img src="img/azure.svg" alt="azure-icon" width="16px">
+                                <span class="is-hidden"> Microsoft Azure</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://databricks.com/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Databricks">
+                                <img src="img/databricks.svg" alt="databricks-icon" width="16px">
+                                <span class="is-hidden"> Databricks</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.python.org/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Python">
+                                <img src="img/python.svg" alt="python-icon" width="16px">
+                                <span class="is-hidden"> Python</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://powerbi.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Microsoft Power BI">
+                                <img src="img/powerbi.svg" alt="powerbi-icon" width="16px">
+                                <span class="is-hidden"> Power BI</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="is-hidden">Contacts:</p>
+                    <div class="buttons has-addons contacts">
                         <a href="https://www.linkedin.com/in/venantiusgalih" target="_blank" class="button is-link is-outlined is-info">
                             <span class="icon"><i class="fab fa-linkedin-in"></i></span>
-                            <span>LinkedIn</span>
-                        </a>
+                            <span>LinkedIn</span></a> <!-- /a inserted in the end of span because of spacing issue -->
+                        <span class="is-hidden">&nbsp;|&nbsp;</span>
                         <a href="https://github.com/venantiusgalih/" target="_blank" class="button is-link is-outlined is-info">
                             <span class="icon"><i class="fab fa-github"></i></span>
-                            <span>Github</span>
-                        </a>
+                            <span>Github</span></a>
                     </div>
                     <div class="content">
                         <p>
                             Feel free to check my profile on <a href="https://glints.com/id/profile/public/527c86ed-34e5-4304-beed-5496a4b82bd6" target="_blank">Glints</a> 
                             and <span class="has-text-weight-semibold">find me</span> on <a href="https://kalibrr.com" target="_blank">Kalibrr</a>.
                         </p>
+                        <br>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- Skills-->
+        <div class="section">
+            <div class="container">
+                <h3 class="is-hidden">Tech</h3>
+                <ul class="columns is-multiline is-gapless tech is-vcentered">
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://azure.microsoft.com" target="_blank">
+                            <img src="img/azure.svg" alt="azure-icon" width="16px">
+                            <span class="title is-size-5">Microsoft Azure</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>Cloud Platform</span>
+                        </a>
+                    </li>
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://azure.microsoft.com/en-us/products/machine-learning" target="_blank">
+                            <img src="img/azure-ml.svg" alt="azure-ml-icon" width="16px">
+                            <span class="title is-size-5">Azure ML</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>Cloud Platform</span>
+                        </a>
+                    </li>
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://databricks.com" target="_blank">
+                            <img src="img/databricks.svg" alt="databricks-icon" width="16px">
+                            <span class="title is-size-5">Databricks</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>Cloud Platform</span>
+                        </a>
+                    </li>
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://python.org" target="_blank">
+                            <img src="img/python.svg" alt="python-icon" width="16px">
+                            <span class="title is-size-5">Python</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>Programming Language</span>
+                        </a>
+                    </li>
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://powerbi.microsoft.com" target="_blank">
+                            <img src="img/powerbi.svg" alt="powerbi-icon" width="16px">
+                            <span class="title is-size-5">Microsoft Power BI</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>Business Inteligent Tools</span>
+                        </a>
+                    </li>
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://fastapi.tiangolo.com/" target="_blank">
+                            <img src="img/fastapi.svg" alt="fastapi-icon" width="16px">
+                            <span class="title is-size-5">FastAPI</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>Python Framework</span>
+                        </a>
+                    </li>
+                    <li class="column is-half-tablet is-one-quarter-widescreen">
+                        <a href="https://bulma.io/" target="_blank">
+                            <img src="img/bulma.svg" alt="bulma-icon" width="16px">
+                            <span class="title is-size-5">Bulma</span>
+                            <span class="is-hidden">&nbsp;-&nbsp;</span>
+                            <span>CSS Framework</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <br>
+        </div>
         <!-- Footer -->
         <footer class="footer">
             <div class="content has-text-centered">
-            <p>
-                <a href="https://bulma.io" target="_blank">
-                    <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="256" height="48">
-                </a>
-                <br>
-            </p>
-            Using the <a href="https://github.com/CreativeBulma/bulma-tooltip/" target="_blank">Bulma Extensions Tooltip</a> 
-            and <a href="https://grsmto.github.io/simplebar/" target="_blank">SimpleBar</a> <br>
-            Hosted in <a href="https://pages.github.com" target="_blank">Github Pages</a>
+                <p>
+                    <a href="https://bulma.io" target="_blank">
+                        <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="256">
+                    </a>
+                </p>
+                Using the <a href="https://github.com/CreativeBulma/bulma-tooltip/" target="_blank">Bulma Extensions Tooltip</a> 
+                and <a href="https://grsmto.github.io/simplebar/" target="_blank">SimpleBar</a>.
+                Hosted in <a href="https://pages.github.com" target="_blank">Github Pages</a>.
             </div>
         </footer>
     </div>
