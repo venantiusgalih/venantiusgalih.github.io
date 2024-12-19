@@ -1,39 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 6.3499999 6.3499999"
-   height="6.3499999mm"
-   width="6.3499999mm">
-  <defs
-     id="defs2" />
-  <metadata
-     id="metadata5">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(-87.539286,-84.426191)"
-     id="layer1">
-    <path
-       id="path815"
-       d="m 87.539286,84.426191 h 6.35 v 6.35 h -6.35 z"
-       style="fill:none;stroke-width:0.26458332" />
-    <path
-       style="stroke-width:0.26458332;fill:#009688;"
-       id="path817"
-       d="m 90.714286,84.960649 c -1.457854,0 -2.640542,1.182688 -2.640542,2.640542 0,1.457854 1.182688,2.640542 2.640542,2.640542 1.457854,0 2.640542,-1.182688 2.640542,-2.640542 0,-1.457854 -1.182688,-2.640542 -2.640542,-2.640542 z m -0.137583,4.757209 v -1.656292 h -0.92075 l 1.322916,-2.577042 v 1.656292 h 0.886354 z" />
-  </g>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path id="path875-5-9-7-3-2-3-9-9-8-0-0-5-87-7" d="M9,1.515C9,1.515 9,1.515 9,1.515C4.894,1.515 1.515,4.882 1.515,8.975C1.515,8.975 1.515,8.976 1.515,8.976C1.515,13.069 4.893,16.437 9,16.437C9,16.437 9,16.437 9,16.437C13.107,16.437 16.485,13.069 16.485,8.976C16.485,8.976 16.485,8.975 16.485,8.975C16.485,4.882 13.106,1.515 9,1.515ZM8.483,4.893L13.192,4.893L8.464,8.216L11.697,8.216L4.808,13.058L6.303,9.735L6.987,8.216L8.483,4.893Z" style="fill:rgb(0,150,136);fill-opacity:0.98;fill-rule:nonzero;"/>
 </svg>
