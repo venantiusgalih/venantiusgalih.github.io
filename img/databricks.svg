@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 63 65" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="#A" x=".5" y=".5"/><symbol id="A" overflow="visible"><g stroke="none" fill-rule="nonzero"><path d="M0 37.496v10.315L30.946 64l30.946-16.188V37.496l-10.918-5.572 10.918-5.722V15.887l-.075.075L30.946 0 .076 15.887H.001v10.315l10.918 5.722L.001 37.496" fill="#db1905"/><path d="M0 37.496l30.946 16.189 30.946-16.188-10.918-5.572L30.946 42.4 10.918 31.925zm61.892-21.534L30.946 32.15 0 15.962 30.946 0z" fill="#ff5224"/></g></symbol></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 36 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Databricks-Icon" serif:id="Databricks Icon">
+        <path id="Databricks-icon" serif:id="Databricks/icon" d="M33.819,17.302L17.92,26.54L0.895,16.669L0.077,17.126L0.077,24.292L17.92,34.619L33.819,25.416L33.819,29.209L17.92,38.448L0.895,28.577L0.077,29.034L0.077,30.263L17.92,40.59L35.729,30.263L35.729,23.097L34.91,22.641L17.92,32.476L1.987,23.273L1.987,19.479L17.92,28.683L35.729,18.355L35.729,11.295L34.842,10.768L17.92,20.568L2.806,11.857L17.92,3.11L30.339,10.311L31.43,9.679L31.43,8.801L17.92,0.968L0.077,11.295L0.077,12.419L17.92,22.746L33.819,13.508L33.819,17.302Z" style="fill:rgb(237,60,44);fill-rule:nonzero;"/>
+    </g>
+</svg>
