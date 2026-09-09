@@ -69,6 +69,8 @@
             height: 100dvh;
             max-height: 100vh;
             max-height: 100dvh;
+            width: 100vw;
+            width: 100dvw;
             margin: 0;
             padding: 0;
             overflow: hidden !important;
@@ -79,17 +81,18 @@
             -webkit-user-select: none;
             display: flex;
             flex-direction: column;
-            padding-left: max(0px, env(safe-area-inset-left));
-            padding-right: max(0px, env(safe-area-inset-right));
         }
 
         /* ============================================================
            Unified Mobile App Top HUD
            ============================================================ */
         .app-hud {
-            height: 44px;
-            padding: 0 10px;
-            background: rgba(15, 23, 42, 0.92);
+            min-height: calc(44px + env(safe-area-inset-top, 0px));
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-left: max(10px, env(safe-area-inset-left, 0px));
+            padding-right: max(10px, env(safe-area-inset-right, 0px));
+            padding-bottom: 0;
+            background: rgba(15, 23, 42, 0.94);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--bg-card-border);
@@ -100,12 +103,19 @@
             flex-shrink: 0;
             z-index: 50;
             box-sizing: border-box;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .app-hud::-webkit-scrollbar {
+            display: none;
         }
 
         .hud-group {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-shrink: 0;
         }
 
         .hud-btn {
@@ -126,6 +136,7 @@
             white-space: nowrap;
             touch-action: manipulation;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .hud-btn:hover {
@@ -172,11 +183,14 @@
             border-radius: var(--radius-sm);
             padding: 0 6px;
             height: 32px;
+            max-width: 140px;
+            flex-shrink: 0;
         }
 
         .hud-select-icon {
             font-size: 0.75rem;
             color: #fbbf24;
+            flex-shrink: 0;
         }
 
         .hud-select {
@@ -188,6 +202,10 @@
             outline: none;
             cursor: pointer;
             padding-right: 2px;
+            max-width: 110px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
         .hud-select option {
@@ -205,6 +223,7 @@
             padding: 2px 8px;
             border-radius: var(--radius-sm);
             height: 32px;
+            flex-shrink: 0;
         }
 
         .hud-timer span {
@@ -239,9 +258,9 @@
            Main Scoreboard Grid
            ============================================================ */
         main {
-            flex: 1;
+            flex: 1 1 0%;
+            min-height: 0;
             width: 100%;
-            height: calc(100% - 44px);
             padding: 6px 8px;
             margin: 0;
             display: flex;
@@ -251,7 +270,7 @@
         }
 
         .scoreboard-grid {
-            flex: 1;
+            flex: 1 1 0%;
             height: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -275,31 +294,56 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
             transition: all 0.25s ease;
             position: relative;
+            box-sizing: border-box;
         }
 
-        /* Team Red Theme */
+        /* Dynamic Themed Team Card */
+        .team-card {
+            min-height: 0;
+            height: 100%;
+            padding: 6px 10px 8px 10px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s ease;
+            position: relative;
+            box-sizing: border-box;
+            background: linear-gradient(180deg, var(--card-bg1, #260a0f) 0%, var(--card-bg2, #160609) 100%);
+            border: 2px solid var(--card-border, #7f1d1d);
+        }
+
+        .team-card:hover {
+            border-color: var(--card-primary, #ef4444);
+            box-shadow: 0 8px 24px var(--card-glow, rgba(239, 68, 68, 0.4));
+        }
+
         .team-card.team-a {
-            background: linear-gradient(180deg, #260a0f 0%, #160609 100%);
-            border: 2px solid var(--red-border);
+            --card-primary: #ef4444;
+            --card-hover: #dc2626;
+            --card-border: #7f1d1d;
+            --card-bg1: #260a0f;
+            --card-bg2: #160609;
+            --card-glow: rgba(239, 68, 68, 0.4);
+            --card-text: #fca5a5;
+            --card-light: #fee2e2;
         }
 
-        .team-card.team-a:hover {
-            border-color: var(--red-primary);
-            box-shadow: 0 8px 24px var(--red-glow);
-        }
-
-        /* Team Blue Theme */
         .team-card.team-b {
-            background: linear-gradient(180deg, #091a38 0%, #070f20 100%);
-            border: 2px solid var(--blue-border);
+            --card-primary: #3b82f6;
+            --card-hover: #2563eb;
+            --card-border: #1e3a8a;
+            --card-bg1: #091a38;
+            --card-bg2: #070f20;
+            --card-glow: rgba(59, 130, 246, 0.4);
+            --card-text: #93c5fd;
+            --card-light: #dbeafe;
         }
 
-        .team-card.team-b:hover {
-            border-color: var(--blue-primary);
-            box-shadow: 0 8px 24px var(--blue-glow);
-        }
-
-        /* Team Header: Inline Editable Name + Sets Badge */
+        /* Team Header: Inline Editable Name + Color Badge + Sets Badge */
         .team-header {
             width: 100%;
             display: flex;
@@ -308,26 +352,51 @@
             align-items: center;
             gap: 6px;
             padding: 0 2px;
+            flex-shrink: 0;
         }
 
         .team-name-wrapper {
             flex: 1;
             display: flex;
-            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
             min-width: 0;
+        }
+
+        .team-color-badge {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.65);
+            cursor: pointer;
+            flex-shrink: 0;
+            background-color: var(--card-primary, #ef4444);
+            box-shadow: 0 0 8px var(--card-glow, rgba(239, 68, 68, 0.5));
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            padding: 0;
+            outline: none;
+        }
+
+        .team-color-badge:hover {
+            transform: scale(1.2);
+            border-color: #fff;
+        }
+
+        .team-color-badge:active {
+            transform: scale(0.92);
         }
 
         .team-name-input {
             background: transparent;
             border: 1px dashed transparent;
-            color: #fff;
+            color: var(--card-text, #fff);
             font-size: 1.05rem;
             font-weight: 700;
             text-align: left;
             padding: 2px 4px;
             border-radius: var(--radius-sm);
             width: 100%;
-            max-width: 140px;
+            max-width: 125px;
             outline: none;
             transition: all 0.2s;
             overflow: hidden;
@@ -335,18 +404,37 @@
             white-space: nowrap;
         }
 
-        .team-card.team-a .team-name-input { color: #fca5a5; }
-        .team-card.team-b .team-name-input { color: #93c5fd; }
-
         .team-name-input:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .team-name-input:focus {
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid #fff;
             color: #fff;
+        }
+
+        .team-edit-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 0.72rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+            opacity: 0.75;
+        }
+
+        .team-edit-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            opacity: 1;
         }
 
         .sets-badge {
@@ -372,7 +460,8 @@
 
         /* Massive Touch-Optimized Score Display */
         .score-display-wrapper {
-            flex: 1;
+            flex: 1 1 0%;
+            min-height: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -381,6 +470,7 @@
             padding: 0;
             margin: 0;
             touch-action: manipulation;
+            overflow: hidden;
         }
 
         .score-number {
@@ -392,16 +482,12 @@
             transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             user-select: none;
+            -webkit-user-select: none;
         }
 
-        .team-card.team-a .score-number {
-            color: #fee2e2;
-            filter: drop-shadow(0 0 16px var(--red-glow));
-        }
-
-        .team-card.team-b .score-number {
-            color: #dbeafe;
-            filter: drop-shadow(0 0 16px var(--blue-glow));
+        .team-card .score-number {
+            color: var(--card-light, #fff);
+            filter: drop-shadow(0 0 16px var(--card-glow, rgba(239, 68, 68, 0.4)));
         }
 
         .score-display-wrapper:active .score-number {
@@ -415,6 +501,7 @@
             width: 100%;
             margin-top: 4px;
             touch-action: manipulation;
+            flex-shrink: 0;
         }
 
         .btn-score {
@@ -430,6 +517,8 @@
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .btn-score:active {
@@ -438,33 +527,25 @@
 
         .btn-plus {
             flex: 3;
-            height: 46px;
-            font-size: 1.5rem;
+            height: 48px;
+            font-size: 1.4rem;
             color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .team-card.team-a .btn-plus {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        .team-card .btn-plus {
+            background: linear-gradient(135deg, var(--card-primary, #ef4444) 0%, var(--card-hover, #dc2626) 100%);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .team-card.team-a .btn-plus:hover {
-            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-            box-shadow: 0 6px 18px var(--red-glow);
-        }
-
-        .team-card.team-b .btn-plus {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .team-card.team-b .btn-plus:hover {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-            box-shadow: 0 6px 18px var(--blue-glow);
+        .team-card .btn-plus:hover {
+            box-shadow: 0 6px 18px var(--card-glow, rgba(239, 68, 68, 0.4));
+            filter: brightness(1.08);
         }
 
         .btn-minus {
             flex: 1;
-            height: 46px;
+            min-width: 40px;
+            height: 48px;
             font-size: 1.15rem;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -481,18 +562,20 @@
            ============================================================ */
         .bottom-bar {
             display: none;
-            height: 48px;
+            min-height: calc(52px + env(safe-area-inset-bottom, 0px));
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-top: 1px solid var(--bg-card-border);
-            padding: 0 6px;
+            padding-top: 5px;
+            padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
+            padding-left: max(8px, env(safe-area-inset-left, 0px));
+            padding-right: max(8px, env(safe-area-inset-right, 0px));
             align-items: center;
             justify-content: space-around;
             gap: 4px;
             flex-shrink: 0;
             z-index: 50;
-            padding-bottom: max(0px, env(safe-area-inset-bottom));
             box-sizing: border-box;
         }
 
@@ -504,19 +587,29 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2px;
-            font-size: 0.7rem;
+            gap: 3px;
+            font-size: 0.72rem;
             font-weight: 600;
-            padding: 4px 6px;
+            padding: 3px 4px;
+            height: 42px;
             cursor: pointer;
             border-radius: var(--radius-sm);
             transition: all 0.15s ease;
             flex: 1;
+            min-width: 0;
             touch-action: manipulation;
         }
 
         .bottom-btn i {
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .bottom-btn span {
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .bottom-btn:hover, .bottom-btn:active {
@@ -538,14 +631,16 @@
                 display: none !important;
             }
             main {
-                height: calc(100% - 44px - 48px);
-                padding-bottom: 4px;
+                padding-top: 6px;
+                padding-bottom: 6px;
+                padding-left: max(8px, env(safe-area-inset-left, 0px));
+                padding-right: max(8px, env(safe-area-inset-right, 0px));
             }
             .score-number {
-                font-size: clamp(4.5rem, 20vw, 9rem);
+                font-size: clamp(4rem, 19vw, 8.5rem);
             }
             .btn-plus, .btn-minus {
-                height: 52px;
+                height: clamp(44px, 6.5vh, 50px);
             }
         }
 
@@ -557,28 +652,192 @@
                 display: flex !important;
             }
             main {
-                height: calc(100% - 44px);
-                padding-bottom: max(6px, env(safe-area-inset-bottom));
+                padding-top: 4px;
+                padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
+                padding-left: max(8px, env(safe-area-inset-left, 0px));
+                padding-right: max(8px, env(safe-area-inset-right, 0px));
             }
             .score-number {
-                font-size: min(34vh, 20vw);
+                font-size: min(32vh, 18vw);
+            }
+            .btn-plus, .btn-minus {
+                height: clamp(38px, 10vh, 46px);
             }
         }
 
-        @media (max-width: 720px) {
+        /* Compact screens, tablets, or mobile landscape */
+        @media (max-width: 920px), (max-height: 520px) {
             .hud-btn-label {
                 display: none !important;
             }
             .hud-btn {
                 padding: 0 7px;
+                height: 30px;
+                min-width: 30px;
+                gap: 0;
             }
-            .team-name-input {
-                max-width: 105px;
-                font-size: 0.95rem;
+            .hud-group {
+                gap: 4px;
+            }
+            .hud-select-wrapper {
+                height: 30px;
+                padding: 0 4px;
+                max-width: 120px;
+            }
+            .hud-select {
+                font-size: 0.75rem;
+                max-width: 95px;
+            }
+            .hud-timer {
+                height: 30px;
+                padding: 2px 6px;
+                gap: 4px;
             }
             .hud-timer span {
                 font-size: 0.95rem;
                 min-width: 44px;
+            }
+            .hud-timer-btn {
+                font-size: 0.75rem;
+                padding: 2px 3px;
+            }
+            .team-name-input {
+                max-width: 100px;
+                font-size: 0.92rem;
+            }
+        }
+
+        /* Specifically for mobile phones in landscape mode (e.g. iPhone 15 Pro height 393px) */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .app-hud {
+                min-height: calc(38px + env(safe-area-inset-top, 0px));
+                height: calc(38px + env(safe-area-inset-top, 0px));
+            }
+            .hud-btn {
+                height: 28px;
+                min-width: 28px;
+                font-size: 0.78rem;
+                padding: 0 6px;
+            }
+            .hud-select-wrapper {
+                height: 28px;
+            }
+            .hud-timer {
+                height: 28px;
+            }
+            .hud-timer span {
+                font-size: 0.88rem;
+                min-width: 40px;
+            }
+            .team-card {
+                padding: 4px 8px 6px 8px;
+            }
+            .team-name-input {
+                font-size: 0.88rem;
+                max-width: 120px;
+                padding: 1px 3px;
+            }
+            .sets-badge {
+                font-size: 0.68rem;
+                padding: 2px 6px;
+            }
+            .score-number {
+                font-size: min(28vh, 16vw);
+            }
+            .score-controls {
+                margin-top: 3px;
+                gap: 6px;
+            }
+            .btn-plus, .btn-minus {
+                height: 36px;
+            }
+            .btn-plus {
+                font-size: 1.25rem;
+            }
+            .btn-minus {
+                font-size: 1rem;
+            }
+            .modal-overlay {
+                padding: 8px;
+            }
+            .modal-box {
+                padding: 12px 16px;
+                gap: 8px;
+                max-height: 94vh;
+                overflow-y: auto;
+            }
+            .modal-team-box {
+                max-height: 94vh;
+                padding: 10px 14px;
+                gap: 8px;
+            }
+            .team-tab-btn {
+                padding: 5px 8px;
+                font-size: 0.82rem;
+            }
+            .modal-input {
+                padding: 6px 8px;
+                font-size: 0.9rem;
+            }
+            .color-swatch-grid {
+                grid-template-columns: repeat(9, 1fr);
+                gap: 5px;
+            }
+            .color-swatch-btn {
+                height: 28px;
+            }
+            .name-presets {
+                display: none;
+            }
+            .team-preview-box {
+                padding: 4px 8px;
+            }
+            .history-list {
+                max-height: 45vh;
+            }
+        }
+
+        /* Narrow mobile screens in portrait (e.g. iPhone 15 Pro 393px width or smaller) */
+        @media (max-width: 420px) and (orientation: portrait) {
+            .team-card {
+                padding: 6px 6px 8px 6px;
+            }
+            .team-header {
+                gap: 4px;
+            }
+            .team-name-wrapper {
+                gap: 3px;
+            }
+            .team-color-badge {
+                width: 14px;
+                height: 14px;
+            }
+            .team-name-input {
+                font-size: 0.86rem;
+                max-width: 72px;
+                padding: 1px 2px;
+            }
+            .team-edit-btn {
+                padding: 1px;
+                font-size: 0.65rem;
+            }
+            .sets-badge {
+                font-size: 0.68rem;
+                padding: 2px 5px;
+                gap: 3px;
+            }
+            .score-controls {
+                gap: 5px;
+            }
+            .btn-minus {
+                min-width: 36px;
+            }
+            .bottom-btn {
+                font-size: 0.68rem;
+                padding: 3px 2px;
+            }
+            .bottom-btn i {
+                font-size: 0.92rem;
             }
         }
 
@@ -598,7 +857,8 @@
             align-items: center;
             justify-content: center;
             z-index: 200;
-            padding: 14px;
+            padding: max(14px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) max(14px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+            box-sizing: border-box;
         }
 
         .modal-overlay.active {
@@ -677,6 +937,234 @@
         }
         .modal-btn.btn-danger:hover {
             background: #dc2626;
+        }
+
+        /* ============================================================
+           Team Customization Modal (Rename & Colors)
+           ============================================================ */
+        .modal-team-box {
+            max-width: 440px;
+            max-height: 88vh;
+            overflow-y: auto;
+            gap: 12px;
+        }
+
+        .team-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--bg-card-border);
+        }
+
+        .team-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .team-tab-btn.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--bg-card-border);
+            border-radius: var(--radius-sm);
+            padding: 9px 12px;
+            color: #fff;
+            font-size: 0.98rem;
+            font-weight: 600;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .modal-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+
+        .name-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 2px;
+        }
+
+        .preset-tag {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--bg-card-border);
+            color: var(--text-muted);
+            font-size: 0.74rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .preset-tag:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .color-swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .color-swatch-btn {
+            height: 38px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .color-swatch-btn:hover {
+            transform: scale(1.08);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .color-swatch-btn.selected {
+            border-color: #fff;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+            transform: scale(1.06);
+        }
+
+        .custom-color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 4px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--bg-card-border);
+        }
+
+        .custom-color-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .custom-color-picker-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .custom-color-input {
+            width: 32px;
+            height: 28px;
+            padding: 0;
+            border: 1px solid var(--bg-card-border);
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .custom-color-hex {
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .team-preview-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--bg-card-border);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .preview-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .preview-card-mini {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .preview-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .preview-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .preview-score {
+            font-family: 'Chakra Petch', monospace;
+            font-weight: 800;
+            font-size: 1.15rem;
         }
 
         /* History List Inside Modal */
@@ -850,8 +1338,8 @@
         /* Toast Notifications */
         .toast-container {
             position: fixed;
-            bottom: 60px;
-            right: 14px;
+            bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+            right: max(14px, env(safe-area-inset-right, 0px));
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -921,6 +1409,10 @@
         <div class="hud-group hud-right">
             <!-- Action buttons visible in Landscape -->
             <div class="hud-group hud-actions-desktop">
+                <button id="btn-teams-modal" class="hud-btn" title="Rename Teams & Change Colors (T)">
+                    <i class="fas fa-palette"></i>
+                    <span class="hud-btn-label">Teams</span>
+                </button>
                 <button id="btn-swap-sides" class="hud-btn" title="Swap Sides (S)">
                     <i class="fas fa-repeat"></i>
                     <span class="hud-btn-label">Swap</span>
@@ -956,11 +1448,13 @@
     <main>
         <div class="scoreboard-grid" id="scoreboard-grid">
             
-            <!-- Side A: RED -->
+            <!-- Side A -->
             <section class="team-card team-a" id="card-team-a">
                 <div class="team-header">
                     <div class="team-name-wrapper">
+                        <button class="team-color-badge" id="btn-team-color-a" title="Change Team Color & Name" aria-label="Change Team A Color"></button>
                         <input type="text" id="name-team-a" class="team-name-input" value="Team Red" maxlength="20" title="Click to rename team A">
+                        <button class="team-edit-btn" id="btn-edit-team-a" title="Edit Team Name & Color" aria-label="Edit Team A"><i class="fas fa-pen"></i></button>
                     </div>
                     <div class="sets-badge" id="sets-team-a" title="Sets / Games Won (Click +1, Right-click -1)">
                         <i class="fas fa-award"></i>
@@ -984,11 +1478,13 @@
                 </div>
             </section>
 
-            <!-- Side B: BLUE -->
+            <!-- Side B -->
             <section class="team-card team-b" id="card-team-b">
                 <div class="team-header">
                     <div class="team-name-wrapper">
+                        <button class="team-color-badge" id="btn-team-color-b" title="Change Team Color & Name" aria-label="Change Team B Color"></button>
                         <input type="text" id="name-team-b" class="team-name-input" value="Team Blue" maxlength="20" title="Click to rename team B">
+                        <button class="team-edit-btn" id="btn-edit-team-b" title="Edit Team Name & Color" aria-label="Edit Team B"><i class="fas fa-pen"></i></button>
                     </div>
                     <div class="sets-badge" id="sets-team-b" title="Sets / Games Won (Click +1, Right-click -1)">
                         <i class="fas fa-award"></i>
@@ -1109,10 +1605,84 @@
                     <div class="shortcut-item"><span>Undo Point:</span> <kbd>U</kbd></div>
                     <div class="shortcut-item"><span>Swap Sides:</span> <kbd>S</kbd></div>
                     <div class="shortcut-item"><span>Reset Match:</span> <kbd>R</kbd></div>
+                    <div class="shortcut-item"><span>Rename & Colors:</span> <kbd>T</kbd></div>
                 </div>
             </div>
             <div class="modal-actions">
                 <button class="modal-btn" id="shortcuts-modal-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Team Customization (Rename & Change Color) -->
+    <div class="modal-overlay" id="team-modal">
+        <div class="modal-box modal-team-box">
+            <div class="modal-title">
+                <i class="fas fa-palette" style="color: #38bdf8;"></i>
+                <span>Customize Teams</span>
+            </div>
+
+            <!-- Team Tabs (Team A vs Team B) -->
+            <div class="team-tabs">
+                <button type="button" class="team-tab-btn active" id="tab-btn-team-a">
+                    <span class="tab-color-dot" id="tab-dot-a" style="background-color: #ef4444;"></span>
+                    <span id="tab-name-a">Team Red</span>
+                </button>
+                <button type="button" class="team-tab-btn" id="tab-btn-team-b">
+                    <span class="tab-color-dot" id="tab-dot-b" style="background-color: #3b82f6;"></span>
+                    <span id="tab-name-b">Team Blue</span>
+                </button>
+            </div>
+
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Team Name Input Group -->
+                <div class="form-group">
+                    <label class="form-label" for="modal-team-name">Team / Player Name</label>
+                    <input type="text" id="modal-team-name" class="modal-input" maxlength="20" placeholder="Enter team name...">
+                    <!-- Quick Name Suggestions -->
+                    <div class="name-presets" id="name-presets">
+                        <button type="button" class="preset-tag" data-name="Team 1">Team 1</button>
+                        <button type="button" class="preset-tag" data-name="Team 2">Team 2</button>
+                        <button type="button" class="preset-tag" data-name="Player 1">Player 1</button>
+                        <button type="button" class="preset-tag" data-name="Player 2">Player 2</button>
+                        <button type="button" class="preset-tag" data-name="Home">Home</button>
+                        <button type="button" class="preset-tag" data-name="Away">Away</button>
+                        <button type="button" class="preset-tag" data-name="Red">Red</button>
+                        <button type="button" class="preset-tag" data-name="Blue">Blue</button>
+                    </div>
+                </div>
+
+                <!-- Team Color Picker Group -->
+                <div class="form-group">
+                    <label class="form-label">Team Color Theme</label>
+                    <div class="color-swatch-grid" id="color-swatch-grid"></div>
+                    <div class="custom-color-row">
+                        <label for="custom-color-picker" class="custom-color-label">
+                            <i class="fas fa-eye-dropper"></i>
+                            <span>Custom Color:</span>
+                        </label>
+                        <div class="custom-color-picker-wrap">
+                            <input type="color" id="custom-color-picker" class="custom-color-input" value="#ef4444">
+                            <span id="custom-color-hex" class="custom-color-hex">#ef4444</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Preview Pill -->
+                <div class="team-preview-box" id="team-preview-box">
+                    <span class="preview-label">Preview:</span>
+                    <div class="preview-card-mini" id="preview-card-mini">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="preview-dot" id="preview-dot" style="background-color: #ef4444;"></span>
+                            <span class="preview-name" id="preview-name">Team Red</span>
+                        </div>
+                        <span class="preview-score" id="preview-score">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="modal-btn" id="team-modal-close" style="background: #3b82f6; color: #fff; border-color: #2563eb;">Done</button>
             </div>
         </div>
     </div>
@@ -1135,12 +1705,170 @@
                 scoreB: 0,
                 nameA: 'Team Red',
                 nameB: 'Team Blue',
+                colorA: 'red',
+                colorB: 'blue',
                 setsA: 0,
                 setsB: 0,
                 sport: 'general',
                 soundEnabled: true,
                 swapped: false
             };
+
+            // Preset Team Colors
+            const TEAM_COLORS = {
+                red: {
+                    name: 'Red',
+                    primary: '#ef4444',
+                    hover: '#dc2626',
+                    border: '#7f1d1d',
+                    bg1: '#260a0f',
+                    bg2: '#160609',
+                    glow: 'rgba(239, 68, 68, 0.4)',
+                    text: '#fca5a5',
+                    light: '#fee2e2'
+                },
+                blue: {
+                    name: 'Blue',
+                    primary: '#3b82f6',
+                    hover: '#2563eb',
+                    border: '#1e3a8a',
+                    bg1: '#091a38',
+                    bg2: '#070f20',
+                    glow: 'rgba(59, 130, 246, 0.4)',
+                    text: '#93c5fd',
+                    light: '#dbeafe'
+                },
+                green: {
+                    name: 'Green',
+                    primary: '#10b981',
+                    hover: '#059669',
+                    border: '#064e3b',
+                    bg1: '#052219',
+                    bg2: '#02130e',
+                    glow: 'rgba(16, 185, 129, 0.4)',
+                    text: '#6ee7b7',
+                    light: '#d1fae5'
+                },
+                yellow: {
+                    name: 'Gold',
+                    primary: '#f59e0b',
+                    hover: '#d97706',
+                    border: '#78350f',
+                    bg1: '#2b1b06',
+                    bg2: '#180e03',
+                    glow: 'rgba(245, 158, 11, 0.4)',
+                    text: '#fcd34d',
+                    light: '#fef3c7'
+                },
+                purple: {
+                    name: 'Purple',
+                    primary: '#a855f7',
+                    hover: '#9333ea',
+                    border: '#581c87',
+                    bg1: '#230b38',
+                    bg2: '#140622',
+                    glow: 'rgba(168, 85, 247, 0.4)',
+                    text: '#d8b4fe',
+                    light: '#f3e8ff'
+                },
+                orange: {
+                    name: 'Orange',
+                    primary: '#f97316',
+                    hover: '#ea580c',
+                    border: '#7c2d12',
+                    bg1: '#2c1207',
+                    bg2: '#190a03',
+                    glow: 'rgba(249, 115, 22, 0.4)',
+                    text: '#fdba74',
+                    light: '#ffedd5'
+                },
+                cyan: {
+                    name: 'Cyan',
+                    primary: '#06b6d4',
+                    hover: '#0891b2',
+                    border: '#164e63',
+                    bg1: '#05232a',
+                    bg2: '#031419',
+                    glow: 'rgba(6, 182, 212, 0.4)',
+                    text: '#67e8f9',
+                    light: '#cffafe'
+                },
+                pink: {
+                    name: 'Pink',
+                    primary: '#ec4899',
+                    hover: '#db2777',
+                    border: '#831843',
+                    bg1: '#2b0c1c',
+                    bg2: '#18060f',
+                    glow: 'rgba(236, 72, 153, 0.4)',
+                    text: '#f472b6',
+                    light: '#fce7f3'
+                },
+                slate: {
+                    name: 'Slate',
+                    primary: '#64748b',
+                    hover: '#475569',
+                    border: '#334155',
+                    bg1: '#171e28',
+                    bg2: '#0d131b',
+                    glow: 'rgba(100, 116, 139, 0.4)',
+                    text: '#cbd5e1',
+                    light: '#f1f5f9'
+                }
+            };
+
+            // Dynamic Palette Generator for Custom Hex Colors
+            function generateThemeFromHex(hex) {
+                if (!hex || !hex.startsWith('#')) hex = '#ef4444';
+                let cleanHex = hex.replace('#', '');
+                if (cleanHex.length === 3) {
+                    cleanHex = cleanHex.split('').map(c => c + c).join('');
+                }
+                const num = parseInt(cleanHex, 16) || 0;
+                const r = (num >> 16) & 255;
+                const g = (num >> 8) & 255;
+                const b = num & 255;
+
+                const clamp = val => Math.max(0, Math.min(255, Math.round(val)));
+                const toHex = (cr, cg, cb) => '#' + [cr, cg, cb].map(x => x.toString(16).padStart(2, '0')).join('');
+
+                return {
+                    name: 'Custom',
+                    primary: '#' + cleanHex,
+                    hover: toHex(clamp(r * 0.85), clamp(g * 0.85), clamp(b * 0.85)),
+                    border: toHex(clamp(r * 0.55), clamp(g * 0.55), clamp(b * 0.55)),
+                    bg1: `rgb(${clamp(r * 0.16)}, ${clamp(g * 0.16)}, ${clamp(b * 0.16)})`,
+                    bg2: `rgb(${clamp(r * 0.08)}, ${clamp(g * 0.08)}, ${clamp(b * 0.08)})`,
+                    glow: `rgba(${r}, ${g}, ${b}, 0.4)`,
+                    text: toHex(clamp(r * 0.6 + 255 * 0.4), clamp(g * 0.6 + 255 * 0.4), clamp(b * 0.6 + 255 * 0.4)),
+                    light: toHex(clamp(r * 0.3 + 255 * 0.7), clamp(g * 0.3 + 255 * 0.7), clamp(b * 0.3 + 255 * 0.7))
+                };
+            }
+
+            // Theme resolver
+            function getTheme(keyOrHex) {
+                if (keyOrHex && TEAM_COLORS[keyOrHex]) {
+                    return TEAM_COLORS[keyOrHex];
+                }
+                if (typeof keyOrHex === 'string' && keyOrHex.startsWith('#')) {
+                    return generateThemeFromHex(keyOrHex);
+                }
+                return TEAM_COLORS.red;
+            }
+
+            // Theme applier for card element
+            function applyTeamTheme(cardEl, keyOrHex) {
+                if (!cardEl) return;
+                const theme = getTheme(keyOrHex);
+                cardEl.style.setProperty('--card-primary', theme.primary);
+                cardEl.style.setProperty('--card-hover', theme.hover);
+                cardEl.style.setProperty('--card-border', theme.border);
+                cardEl.style.setProperty('--card-bg1', theme.bg1);
+                cardEl.style.setProperty('--card-bg2', theme.bg2);
+                cardEl.style.setProperty('--card-glow', theme.glow);
+                cardEl.style.setProperty('--card-text', theme.text);
+                cardEl.style.setProperty('--card-light', theme.light);
+            }
 
             // Undo Stack (keeps snapshots of scores)
             const undoStack = [];
@@ -1151,12 +1879,20 @@
             let timerRunning = false;
 
             // DOM Elements
+            const cardTeamAEl = document.getElementById('card-team-a');
+            const cardTeamBEl = document.getElementById('card-team-b');
             const scoreTeamAEl = document.getElementById('score-team-a');
             const scoreTeamBEl = document.getElementById('score-team-b');
             const nameTeamAEl = document.getElementById('name-team-a');
             const nameTeamBEl = document.getElementById('name-team-b');
             const setsValAEl = document.getElementById('sets-val-a');
             const setsValBEl = document.getElementById('sets-val-b');
+            const btnTeamColorA = document.getElementById('btn-team-color-a');
+            const btnTeamColorB = document.getElementById('btn-team-color-b');
+            const btnEditTeamA = document.getElementById('btn-edit-team-a');
+            const btnEditTeamB = document.getElementById('btn-edit-team-b');
+            const btnTeamsModal = document.getElementById('btn-teams-modal');
+
             const sportModeSelect = document.getElementById('sport-mode');
             const timerDisplayEl = document.getElementById('timer-display');
             const timerToggleBtn = document.getElementById('btn-timer-toggle');
@@ -1168,6 +1904,25 @@
             const historyModal = document.getElementById('history-modal');
             const shortcutsModal = document.getElementById('shortcuts-modal');
             const confirmModal = document.getElementById('confirm-modal');
+
+            // Team Customization Modal Elements
+            const teamModal = document.getElementById('team-modal');
+            const teamModalClose = document.getElementById('team-modal-close');
+            const tabBtnTeamA = document.getElementById('tab-btn-team-a');
+            const tabBtnTeamB = document.getElementById('tab-btn-team-b');
+            const tabDotA = document.getElementById('tab-dot-a');
+            const tabDotB = document.getElementById('tab-dot-b');
+            const tabNameA = document.getElementById('tab-name-a');
+            const tabNameB = document.getElementById('tab-name-b');
+            const modalTeamNameInput = document.getElementById('modal-team-name');
+            const namePresetsContainer = document.getElementById('name-presets');
+            const colorSwatchGrid = document.getElementById('color-swatch-grid');
+            const customColorPicker = document.getElementById('custom-color-picker');
+            const customColorHex = document.getElementById('custom-color-hex');
+            const previewCardMini = document.getElementById('preview-card-mini');
+            const previewDot = document.getElementById('preview-dot');
+            const previewName = document.getElementById('preview-name');
+            const previewScore = document.getElementById('preview-score');
 
             // Web Audio API for synthetic feedback
             let audioCtx = null;
@@ -1286,6 +2041,28 @@
                 setsValBEl.textContent = state.setsB;
                 sportModeSelect.value = state.sport;
 
+                // Apply dynamic themes to team cards
+                applyTeamTheme(cardTeamAEl, state.colorA);
+                applyTeamTheme(cardTeamBEl, state.colorB);
+
+                const themeA = getTheme(state.colorA);
+                const themeB = getTheme(state.colorB);
+
+                if (btnTeamColorA) {
+                    btnTeamColorA.style.backgroundColor = themeA.primary;
+                    btnTeamColorA.style.boxShadow = `0 0 8px ${themeA.glow}`;
+                }
+                if (btnTeamColorB) {
+                    btnTeamColorB.style.backgroundColor = themeB.primary;
+                    btnTeamColorB.style.boxShadow = `0 0 8px ${themeB.glow}`;
+                }
+
+                // Update tabs dot & name if tab elements exist
+                if (tabDotA) tabDotA.style.backgroundColor = themeA.primary;
+                if (tabNameA) tabNameA.textContent = state.nameA || 'Team Red';
+                if (tabDotB) tabDotB.style.backgroundColor = themeB.primary;
+                if (tabNameB) tabNameB.textContent = state.nameB || 'Team Blue';
+
                 // Sound icon update
                 const soundIconClass = state.soundEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
                 const soundTitle = state.soundEnabled ? 'Sound Enabled' : 'Sound Muted';
@@ -1368,14 +2145,17 @@
                 const tempScore = state.scoreA;
                 const tempName = state.nameA;
                 const tempSets = state.setsA;
+                const tempColor = state.colorA;
 
                 state.scoreA = state.scoreB;
                 state.nameA = state.nameB;
                 state.setsA = state.setsB;
+                state.colorA = state.colorB;
 
                 state.scoreB = tempScore;
                 state.nameB = tempName;
                 state.setsB = tempSets;
+                state.colorB = tempColor;
 
                 playBeep('point');
                 updateUI();
@@ -1419,12 +2199,14 @@
                     teamA: {
                         name: state.nameA,
                         score: state.scoreA,
-                        sets: state.setsA
+                        sets: state.setsA,
+                        color: state.colorA
                     },
                     teamB: {
                         name: state.nameB,
                         score: state.scoreB,
-                        sets: state.setsB
+                        sets: state.setsB,
+                        color: state.colorB
                     },
                     winner: winner
                 };
@@ -1504,6 +2286,11 @@
                     const winA = item.winner === 'A';
                     const winB = item.winner === 'B';
 
+                    const colorKeyA = (item.teamA && item.teamA.color) || 'red';
+                    const colorKeyB = (item.teamB && item.teamB.color) || 'blue';
+                    const themeA = getTheme(colorKeyA);
+                    const themeB = getTheme(colorKeyB);
+
                     return `
                         <div class="history-item">
                             <div class="history-item-meta">
@@ -1513,17 +2300,17 @@
 
                             <div class="history-score-row">
                                 <div class="history-team ${winA ? 'winner' : ''}">
-                                    <span class="team-dot red"></span>
+                                    <span class="team-dot" style="background-color: ${themeA.primary}; box-shadow: 0 0 6px ${themeA.glow};"></span>
                                     <span>${escapeHTML(item.teamA.name)}</span>
                                 </div>
                                 <div class="history-score-display">
-                                    <span style="color: #fca5a5;">${item.teamA.score}</span>
+                                    <span style="color: ${themeA.primary}; font-weight: 700;">${item.teamA.score}</span>
                                     <span style="color: #64748b; margin: 0 4px;">-</span>
-                                    <span style="color: #93c5fd;">${item.teamB.score}</span>
+                                    <span style="color: ${themeB.primary}; font-weight: 700;">${item.teamB.score}</span>
                                 </div>
                                 <div class="history-team ${winB ? 'winner' : ''}">
                                     <span>${escapeHTML(item.teamB.name)}</span>
-                                    <span class="team-dot blue"></span>
+                                    <span class="team-dot" style="background-color: ${themeB.primary}; box-shadow: 0 0 6px ${themeB.glow};"></span>
                                 </div>
                             </div>
 
@@ -1571,6 +2358,205 @@
                         state = { ...state, ...parsed };
                     }
                 } catch (e) {}
+
+                // Fallback defaults
+                if (!state.colorA) state.colorA = 'red';
+                if (!state.colorB) state.colorB = 'blue';
+                if (!state.nameA) state.nameA = 'Team Red';
+                if (!state.nameB) state.nameB = 'Team Blue';
+            }
+
+            // Team Customization Modal Logic
+            let currentCustomizingTeam = 'A';
+
+            function renderColorSwatches() {
+                if (!colorSwatchGrid) return;
+                const activeColor = currentCustomizingTeam === 'A' ? state.colorA : state.colorB;
+
+                colorSwatchGrid.innerHTML = Object.entries(TEAM_COLORS).map(([key, theme]) => {
+                    const isSelected = activeColor === key;
+                    return `
+                        <button type="button" class="color-swatch-btn ${isSelected ? 'selected' : ''}" 
+                                data-color="${key}" 
+                                title="${theme.name}" 
+                                style="background-color: ${theme.primary};">
+                            ${isSelected ? '<i class="fas fa-check"></i>' : ''}
+                        </button>
+                    `;
+                }).join('');
+
+                colorSwatchGrid.querySelectorAll('.color-swatch-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const colorKey = btn.getAttribute('data-color');
+                        if (currentCustomizingTeam === 'A') {
+                            state.colorA = colorKey;
+                        } else {
+                            state.colorB = colorKey;
+                        }
+                        updateUI();
+                        syncModalUI();
+                    });
+                });
+            }
+
+            function updateModalPreview() {
+                if (!previewCardMini) return;
+                const isA = currentCustomizingTeam === 'A';
+                const curName = isA ? state.nameA : state.nameB;
+                const curColor = isA ? state.colorA : state.colorB;
+                const curScore = isA ? state.scoreA : state.scoreB;
+                const theme = getTheme(curColor);
+
+                if (previewName) {
+                    previewName.textContent = curName || (isA ? 'Team Red' : 'Team Blue');
+                    previewName.style.color = theme.text;
+                }
+                if (previewScore) {
+                    previewScore.textContent = curScore;
+                    previewScore.style.color = theme.light;
+                }
+                if (previewDot) {
+                    previewDot.style.backgroundColor = theme.primary;
+                    previewDot.style.boxShadow = `0 0 6px ${theme.glow}`;
+                }
+                previewCardMini.style.background = `linear-gradient(135deg, ${theme.bg1} 0%, ${theme.bg2} 100%)`;
+                previewCardMini.style.borderColor = theme.border;
+            }
+
+            function syncModalUI() {
+                const isA = currentCustomizingTeam === 'A';
+                if (tabBtnTeamA) tabBtnTeamA.classList.toggle('active', isA);
+                if (tabBtnTeamB) tabBtnTeamB.classList.toggle('active', !isA);
+
+                const themeA = getTheme(state.colorA);
+                const themeB = getTheme(state.colorB);
+                if (tabDotA) tabDotA.style.backgroundColor = themeA.primary;
+                if (tabNameA) tabNameA.textContent = state.nameA || 'Team Red';
+                if (tabDotB) tabDotB.style.backgroundColor = themeB.primary;
+                if (tabNameB) tabNameB.textContent = state.nameB || 'Team Blue';
+
+                if (modalTeamNameInput) {
+                    modalTeamNameInput.value = isA ? state.nameA : state.nameB;
+                }
+
+                const curColor = isA ? state.colorA : state.colorB;
+                const curTheme = getTheme(curColor);
+                if (customColorPicker) customColorPicker.value = curTheme.primary;
+                if (customColorHex) customColorHex.textContent = curTheme.primary.toUpperCase();
+
+                renderColorSwatches();
+                updateModalPreview();
+            }
+
+            function openTeamModal(team = 'A') {
+                currentCustomizingTeam = team;
+                syncModalUI();
+                if (teamModal) teamModal.classList.add('active');
+                if (modalTeamNameInput) {
+                    setTimeout(() => {
+                        modalTeamNameInput.focus();
+                        modalTeamNameInput.select();
+                    }, 60);
+                }
+            }
+
+            function closeTeamModal() {
+                if (teamModal) teamModal.classList.remove('active');
+                saveCurrentState();
+                showToast('Team settings saved', 'info');
+            }
+
+            function setupTeamModalControls() {
+                if (tabBtnTeamA) {
+                    tabBtnTeamA.addEventListener('click', () => {
+                        currentCustomizingTeam = 'A';
+                        syncModalUI();
+                    });
+                }
+                if (tabBtnTeamB) {
+                    tabBtnTeamB.addEventListener('click', () => {
+                        currentCustomizingTeam = 'B';
+                        syncModalUI();
+                    });
+                }
+
+                if (modalTeamNameInput) {
+                    modalTeamNameInput.addEventListener('input', (e) => {
+                        const val = e.target.value;
+                        if (currentCustomizingTeam === 'A') {
+                            state.nameA = val;
+                            if (nameTeamAEl) nameTeamAEl.value = val;
+                            if (tabNameA) tabNameA.textContent = val || 'Team Red';
+                        } else {
+                            state.nameB = val;
+                            if (nameTeamBEl) nameTeamBEl.value = val;
+                            if (tabNameB) tabNameB.textContent = val || 'Team Blue';
+                        }
+                        updateModalPreview();
+                        saveCurrentState();
+                    });
+
+                    modalTeamNameInput.addEventListener('blur', (e) => {
+                        if (!e.target.value.trim()) {
+                            const fallback = currentCustomizingTeam === 'A' ? 'Team Red' : 'Team Blue';
+                            e.target.value = fallback;
+                            if (currentCustomizingTeam === 'A') {
+                                state.nameA = fallback;
+                                if (nameTeamAEl) nameTeamAEl.value = fallback;
+                                if (tabNameA) tabNameA.textContent = fallback;
+                            } else {
+                                state.nameB = fallback;
+                                if (nameTeamBEl) nameTeamBEl.value = fallback;
+                                if (tabNameB) tabNameB.textContent = fallback;
+                            }
+                            updateModalPreview();
+                            saveCurrentState();
+                        }
+                    });
+                }
+
+                if (namePresetsContainer) {
+                    namePresetsContainer.querySelectorAll('.preset-tag').forEach(tag => {
+                        tag.addEventListener('click', () => {
+                            const name = tag.getAttribute('data-name');
+                            if (modalTeamNameInput) modalTeamNameInput.value = name;
+                            if (currentCustomizingTeam === 'A') {
+                                state.nameA = name;
+                                if (nameTeamAEl) nameTeamAEl.value = name;
+                                if (tabNameA) tabNameA.textContent = name;
+                            } else {
+                                state.nameB = name;
+                                if (nameTeamBEl) nameTeamBEl.value = name;
+                                if (tabNameB) tabNameB.textContent = name;
+                            }
+                            updateModalPreview();
+                            saveCurrentState();
+                        });
+                    });
+                }
+
+                if (customColorPicker) {
+                    customColorPicker.addEventListener('input', (e) => {
+                        const hex = e.target.value;
+                        if (customColorHex) customColorHex.textContent = hex.toUpperCase();
+                        if (currentCustomizingTeam === 'A') {
+                            state.colorA = hex;
+                        } else {
+                            state.colorB = hex;
+                        }
+                        updateUI();
+                        syncModalUI();
+                    });
+                }
+
+                if (teamModalClose) {
+                    teamModalClose.addEventListener('click', closeTeamModal);
+                }
+                if (teamModal) {
+                    teamModal.addEventListener('click', (e) => {
+                        if (e.target === teamModal) closeTeamModal();
+                    });
+                }
             }
 
             // Match Stopwatch Timer Logic
@@ -1694,15 +2680,44 @@
                 document.getElementById('btn-minus-b').addEventListener('click', minusScoreB);
                 document.getElementById('display-team-b').addEventListener('click', addScoreB);
 
-                // Team Name Changes
-                nameTeamAEl.addEventListener('input', (e) => {
-                    state.nameA = e.target.value.trim() || 'Team Red';
-                    saveCurrentState();
-                });
-                nameTeamBEl.addEventListener('input', (e) => {
-                    state.nameB = e.target.value.trim() || 'Team Blue';
-                    saveCurrentState();
-                });
+                // Team Name Changes (inline on scoreboard cards)
+                if (nameTeamAEl) {
+                    nameTeamAEl.addEventListener('input', (e) => {
+                        state.nameA = e.target.value;
+                        if (tabNameA) tabNameA.textContent = state.nameA || 'Team Red';
+                        saveCurrentState();
+                    });
+                    nameTeamAEl.addEventListener('blur', (e) => {
+                        if (!e.target.value.trim()) {
+                            state.nameA = 'Team Red';
+                            nameTeamAEl.value = 'Team Red';
+                            if (tabNameA) tabNameA.textContent = 'Team Red';
+                            saveCurrentState();
+                        }
+                    });
+                }
+                if (nameTeamBEl) {
+                    nameTeamBEl.addEventListener('input', (e) => {
+                        state.nameB = e.target.value;
+                        if (tabNameB) tabNameB.textContent = state.nameB || 'Team Blue';
+                        saveCurrentState();
+                    });
+                    nameTeamBEl.addEventListener('blur', (e) => {
+                        if (!e.target.value.trim()) {
+                            state.nameB = 'Team Blue';
+                            nameTeamBEl.value = 'Team Blue';
+                            if (tabNameB) tabNameB.textContent = 'Team Blue';
+                            saveCurrentState();
+                        }
+                    });
+                }
+
+                // Team Customization Modal Triggers
+                if (btnTeamsModal) btnTeamsModal.addEventListener('click', () => openTeamModal('A'));
+                if (btnTeamColorA) btnTeamColorA.addEventListener('click', () => openTeamModal('A'));
+                if (btnEditTeamA) btnEditTeamA.addEventListener('click', () => openTeamModal('A'));
+                if (btnTeamColorB) btnTeamColorB.addEventListener('click', () => openTeamModal('B'));
+                if (btnEditTeamB) btnEditTeamB.addEventListener('click', () => openTeamModal('B'));
 
                 // Sport mode selector
                 sportModeSelect.addEventListener('change', (e) => {
@@ -1803,6 +2818,9 @@
                     } else if (key === 'r') {
                         e.preventDefault();
                         resetCurrentMatch();
+                    } else if (key === 't') {
+                        e.preventDefault();
+                        openTeamModal('A');
                     } else if (key === '?') {
                         e.preventDefault();
                         shortcutsModal.classList.toggle('active');
@@ -1810,10 +2828,12 @@
                         shortcutsModal.classList.remove('active');
                         historyModal.classList.remove('active');
                         confirmModal.classList.remove('active');
+                        if (teamModal) teamModal.classList.remove('active');
                     }
                 });
 
                 setupSetsControls();
+                setupTeamModalControls();
             }
 
             // Init App
