@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Score Tracker - Red vs Blue Scoreboard</title>
     <meta name="description" content="Simple and responsive score tracker for badminton, soccer, and general sports. Red and Blue sides, client-side history, and match timer.">
     
@@ -847,6 +847,363 @@
         footer a:hover {
             color: #fff;
         }
+
+        /* ============================================================
+           Fullscreen HUD & Mobile UI Landscape Mode
+           ============================================================ */
+        
+        /* Base Fullscreen HUD (hidden in normal windowed mode) */
+        .fullscreen-hud {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 40px;
+            padding: 0 10px;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--bg-card-border);
+            flex-shrink: 0;
+            z-index: 50;
+            box-sizing: border-box;
+        }
+
+        .hud-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hud-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--bg-card-border);
+            color: var(--text-main);
+            border-radius: var(--radius-sm);
+            height: 32px;
+            padding: 0 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+
+        .hud-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hud-btn:active {
+            transform: scale(0.94);
+        }
+
+        .hud-btn-reset {
+            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .hud-btn-reset:hover {
+            background: rgba(239, 68, 68, 0.28);
+            border-color: #ef4444;
+            color: #fff;
+        }
+
+        .hud-btn-save {
+            color: #6ee7b7;
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .hud-btn-save:hover {
+            background: rgba(16, 185, 129, 0.28);
+            border-color: #10b981;
+            color: #fff;
+        }
+
+        .hud-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--bg-card-border);
+            padding: 2px 10px;
+            border-radius: var(--radius-sm);
+            height: 32px;
+        }
+
+        .hud-timer span {
+            font-family: 'Chakra Petch', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #38bdf8;
+            min-width: 52px;
+            text-align: center;
+        }
+
+        .hud-timer-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s;
+            touch-action: manipulation;
+        }
+
+        .hud-timer-btn:hover {
+            color: #fff;
+        }
+
+        /* Simplified Layout for Mobile Landscape when Fullscreen */
+        @media (orientation: landscape) {
+            :fullscreen,
+            :-webkit-full-screen,
+            html.fullscreen-mode {
+                overflow: hidden !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+            }
+
+            :fullscreen body,
+            :-webkit-full-screen body,
+            body.fullscreen-mode {
+                height: 100vh !important;
+                height: 100dvh !important;
+                max-height: 100vh !important;
+                max-height: 100dvh !important;
+                overflow: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                padding-left: max(0px, env(safe-area-inset-left)) !important;
+                padding-right: max(0px, env(safe-area-inset-right)) !important;
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            /* Hide heavy desktop elements in fullscreen landscape */
+            :fullscreen header,
+            :-webkit-full-screen header,
+            body.fullscreen-mode header,
+            :fullscreen .settings-bar,
+            :-webkit-full-screen .settings-bar,
+            body.fullscreen-mode .settings-bar,
+            :fullscreen .actions-bar,
+            :-webkit-full-screen .actions-bar,
+            body.fullscreen-mode .actions-bar,
+            :fullscreen .history-section,
+            :-webkit-full-screen .history-section,
+            body.fullscreen-mode .history-section,
+            :fullscreen footer,
+            :-webkit-full-screen footer,
+            body.fullscreen-mode footer,
+            :fullscreen .tap-hint,
+            :-webkit-full-screen .tap-hint,
+            body.fullscreen-mode .tap-hint {
+                display: none !important;
+            }
+
+            /* Show the dedicated streamlined top HUD */
+            :fullscreen .fullscreen-hud,
+            :-webkit-full-screen .fullscreen-hud,
+            body.fullscreen-mode .fullscreen-hud {
+                display: flex !important;
+            }
+
+            /* Main viewport fills 100% height without scrolling */
+            :fullscreen main,
+            :-webkit-full-screen main,
+            body.fullscreen-mode main {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                padding: 0 8px 6px 8px !important;
+                margin: 0 !important;
+                gap: 4px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+                padding-bottom: max(6px, env(safe-area-inset-bottom)) !important;
+            }
+
+            /* Scoreboard grid: 2 equal columns taking full remaining height */
+            :fullscreen .scoreboard-grid,
+            :-webkit-full-screen .scoreboard-grid,
+            body.fullscreen-mode .scoreboard-grid {
+                flex: 1 !important;
+                height: calc(100% - 46px) !important;
+                gap: 8px !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                align-items: stretch !important;
+                margin: 0 !important;
+            }
+
+            /* Team Card: compact, thumb-optimized, zero vertical overflow */
+            :fullscreen .team-card,
+            :-webkit-full-screen .team-card,
+            body.fullscreen-mode .team-card {
+                min-height: 0 !important;
+                height: 100% !important;
+                padding: 6px 10px 8px 10px !important;
+                border-radius: var(--radius-md) !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                overflow: hidden !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+            }
+
+            /* Compact Team Header: Name & Sets badge inline on one row */
+            :fullscreen .team-header,
+            :-webkit-full-screen .team-header,
+            body.fullscreen-mode .team-header {
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                width: 100% !important;
+                padding: 0 4px !important;
+                gap: 6px !important;
+            }
+
+            :fullscreen .team-name-wrapper,
+            :-webkit-full-screen .team-name-wrapper,
+            body.fullscreen-mode .team-name-wrapper {
+                width: auto !important;
+                flex: 1 !important;
+                justify-content: flex-start !important;
+            }
+
+            :fullscreen .team-name-input,
+            :-webkit-full-screen .team-name-input,
+            body.fullscreen-mode .team-name-input {
+                font-size: 1.05rem !important;
+                padding: 2px 4px !important;
+                max-width: 140px !important;
+                text-align: left !important;
+            }
+
+            :fullscreen .sets-badge,
+            :-webkit-full-screen .sets-badge,
+            body.fullscreen-mode .sets-badge {
+                font-size: 0.72rem !important;
+                padding: 2px 8px !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+
+            /* Big Score Display: centered, massive legible digits */
+            :fullscreen .score-display-wrapper,
+            :-webkit-full-screen .score-display-wrapper,
+            body.fullscreen-mode .score-display-wrapper {
+                flex: 1 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                cursor: pointer !important;
+                touch-action: manipulation;
+            }
+
+            :fullscreen .score-number,
+            :-webkit-full-screen .score-number,
+            body.fullscreen-mode .score-number {
+                font-size: min(32vh, 18vw) !important;
+                line-height: 1 !important;
+                letter-spacing: -2px !important;
+            }
+
+            /* Compact Score Controls (+ / -) at bottom of card */
+            :fullscreen .score-controls,
+            :-webkit-full-screen .score-controls,
+            body.fullscreen-mode .score-controls {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-top: 4px !important;
+                gap: 8px !important;
+                touch-action: manipulation;
+            }
+
+            :fullscreen .btn-plus,
+            :-webkit-full-screen .btn-plus,
+            body.fullscreen-mode .btn-plus {
+                height: 42px !important;
+                font-size: 1.4rem !important;
+                border-radius: var(--radius-sm) !important;
+                flex: 3 !important;
+                touch-action: manipulation;
+            }
+
+            :fullscreen .btn-minus,
+            :-webkit-full-screen .btn-minus,
+            body.fullscreen-mode .btn-minus {
+                height: 42px !important;
+                font-size: 1.1rem !important;
+                border-radius: var(--radius-sm) !important;
+                flex: 1 !important;
+                touch-action: manipulation;
+            }
+
+            /* Dialogs & Toasts in fullscreen landscape */
+            :fullscreen .toast-container,
+            :-webkit-full-screen .toast-container,
+            body.fullscreen-mode .toast-container {
+                bottom: 10px !important;
+                right: 10px !important;
+                max-width: 320px !important;
+            }
+
+            :fullscreen .toast,
+            :-webkit-full-screen .toast,
+            body.fullscreen-mode .toast {
+                padding: 6px 12px !important;
+                font-size: 0.8rem !important;
+            }
+
+            :fullscreen .modal-box,
+            :-webkit-full-screen .modal-box,
+            body.fullscreen-mode .modal-box {
+                padding: 16px !important;
+                max-height: 90vh !important;
+                overflow-y: auto !important;
+            }
+        }
+
+        /* Compact widths in landscape (e.g. iPhone SE / smaller phones <= 720px) */
+        @media (orientation: landscape) and (max-width: 720px) {
+            .hud-btn-label {
+                display: none !important;
+            }
+            .hud-btn {
+                padding: 0 8px !important;
+            }
+            :fullscreen .team-name-input,
+            :-webkit-full-screen .team-name-input,
+            body.fullscreen-mode .team-name-input {
+                max-width: 105px !important;
+                font-size: 0.95rem !important;
+            }
+            .hud-timer span {
+                font-size: 0.95rem !important;
+                min-width: 44px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -882,6 +1239,50 @@
 
     <!-- Main Score App -->
     <main>
+        <!-- Simplified Fullscreen HUD (Mobile Landscape) -->
+        <div class="fullscreen-hud" id="fullscreen-hud" aria-label="Fullscreen Controls">
+            <div class="hud-group hud-left">
+                <button id="fs-btn-fullscreen" class="hud-btn" title="Exit Fullscreen Mode">
+                    <i class="fas fa-compress"></i>
+                </button>
+                <button id="fs-btn-sound" class="hud-btn" title="Toggle Sound Feedback">
+                    <i class="fas fa-volume-high"></i>
+                </button>
+            </div>
+
+            <div class="hud-group hud-center">
+                <div class="hud-timer" title="Match Duration Stopwatch">
+                    <i class="far fa-clock" style="color: var(--text-muted);"></i>
+                    <span id="fs-timer-display">00:00</span>
+                    <button id="fs-btn-timer-toggle" class="hud-timer-btn" title="Start / Pause Timer">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="fs-btn-timer-reset" class="hud-timer-btn" title="Reset Timer">
+                        <i class="fas fa-rotate-left"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hud-group hud-right">
+                <button id="fs-btn-swap" class="hud-btn" title="Swap Teams Red and Blue (S)">
+                    <i class="fas fa-repeat"></i>
+                    <span class="hud-btn-label">Swap</span>
+                </button>
+                <button id="fs-btn-undo" class="hud-btn" title="Undo Last Point (U)">
+                    <i class="fas fa-rotate-left"></i>
+                    <span class="hud-btn-label">Undo</span>
+                </button>
+                <button id="fs-btn-save" class="hud-btn hud-btn-save" title="Save Match to History">
+                    <i class="fas fa-floppy-disk"></i>
+                    <span class="hud-btn-label">Save</span>
+                </button>
+                <button id="fs-btn-reset" class="hud-btn hud-btn-reset" title="Reset Scores to 0 (R)">
+                    <i class="fas fa-trash-can"></i>
+                    <span class="hud-btn-label">Reset</span>
+                </button>
+            </div>
+        </div>
+
         <!-- Settings & Mode Toolbar -->
         <div class="settings-bar">
             <div class="sport-selector">
@@ -1241,9 +1642,18 @@
                 sportModeSelect.value = state.sport;
 
                 // Sound icon update
+                const soundIconClass = state.soundEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
+                const soundTitle = state.soundEnabled ? 'Sound Enabled' : 'Sound Muted';
                 const soundIcon = soundToggleBtn.querySelector('i');
-                soundIcon.className = state.soundEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
-                soundToggleBtn.title = state.soundEnabled ? 'Sound Enabled' : 'Sound Muted';
+                if (soundIcon) soundIcon.className = soundIconClass;
+                soundToggleBtn.title = soundTitle;
+
+                const fsSoundBtn = document.getElementById('fs-btn-sound');
+                if (fsSoundBtn) {
+                    const fsIcon = fsSoundBtn.querySelector('i');
+                    if (fsIcon) fsIcon.className = soundIconClass;
+                    fsSoundBtn.title = soundTitle;
+                }
 
                 // Save active session to localStorage
                 saveCurrentState();
@@ -1534,20 +1944,40 @@
                 return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
             }
 
+            function updateTimerUI() {
+                const formatted = formatTime(timerSeconds);
+                timerDisplayEl.textContent = formatted;
+                const fsDisplay = document.getElementById('fs-timer-display');
+                if (fsDisplay) fsDisplay.textContent = formatted;
+
+                const iconHTML = timerRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+                const titleText = timerRunning ? 'Pause Timer' : (timerSeconds > 0 ? 'Resume Timer' : 'Start Timer');
+
+                timerToggleBtn.innerHTML = iconHTML;
+                timerToggleBtn.title = titleText;
+
+                const fsToggleBtn = document.getElementById('fs-btn-timer-toggle');
+                if (fsToggleBtn) {
+                    fsToggleBtn.innerHTML = iconHTML;
+                    fsToggleBtn.title = titleText;
+                }
+            }
+
             function toggleTimer() {
                 if (timerRunning) {
                     clearInterval(timerInterval);
                     timerRunning = false;
-                    timerToggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    timerToggleBtn.title = 'Resume Timer';
+                    updateTimerUI();
                 } else {
                     timerRunning = true;
+                    updateTimerUI();
                     timerInterval = setInterval(() => {
                         timerSeconds++;
-                        timerDisplayEl.textContent = formatTime(timerSeconds);
+                        const formatted = formatTime(timerSeconds);
+                        timerDisplayEl.textContent = formatted;
+                        const fsDisplay = document.getElementById('fs-timer-display');
+                        if (fsDisplay) fsDisplay.textContent = formatted;
                     }, 1000);
-                    timerToggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    timerToggleBtn.title = 'Pause Timer';
                 }
             }
 
@@ -1555,9 +1985,7 @@
                 clearInterval(timerInterval);
                 timerRunning = false;
                 timerSeconds = 0;
-                timerDisplayEl.textContent = '00:00';
-                timerToggleBtn.innerHTML = '<i class="fas fa-play"></i>';
-                timerToggleBtn.title = 'Start Timer';
+                updateTimerUI();
             }
 
             // Sets / Games Won Counter
@@ -1636,22 +2064,117 @@
                 document.getElementById('btn-export-history').addEventListener('click', exportHistory);
                 document.getElementById('btn-clear-history').addEventListener('click', clearAllHistory);
 
-                // Sound toggle
-                soundToggleBtn.addEventListener('click', () => {
+                // Sound toggle helper
+                function toggleSound() {
                     state.soundEnabled = !state.soundEnabled;
                     saveCurrentState();
                     updateUI();
                     showToast(state.soundEnabled ? 'Sound enabled' : 'Sound muted', 'info');
-                });
+                }
 
-                // Fullscreen toggle
-                document.getElementById('btn-fullscreen').addEventListener('click', () => {
-                    if (!document.fullscreenElement) {
-                        document.documentElement.requestFullscreen().catch(() => {});
+                soundToggleBtn.addEventListener('click', toggleSound);
+                const fsSoundBtn = document.getElementById('fs-btn-sound');
+                if (fsSoundBtn) fsSoundBtn.addEventListener('click', toggleSound);
+
+                // Fullscreen management & layout synchronization
+                function updateFullscreenUI() {
+                    const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('fullscreen-mode'));
+
+                    if (isFS) {
+                        document.body.classList.add('fullscreen-mode');
+                        document.documentElement.classList.add('fullscreen-mode');
                     } else {
-                        if (document.exitFullscreen) document.exitFullscreen();
+                        document.body.classList.remove('fullscreen-mode');
+                        document.documentElement.classList.remove('fullscreen-mode');
                     }
+
+                    const iconClass = isFS ? 'fas fa-compress' : 'fas fa-expand';
+                    const titleText = isFS ? 'Exit Fullscreen' : 'Fullscreen Mode';
+
+                    const mainFsBtn = document.getElementById('btn-fullscreen');
+                    if (mainFsBtn) {
+                        const icon = mainFsBtn.querySelector('i');
+                        if (icon) icon.className = iconClass;
+                        mainFsBtn.title = titleText;
+                    }
+
+                    const hudFsBtn = document.getElementById('fs-btn-fullscreen');
+                    if (hudFsBtn) {
+                        const icon = hudFsBtn.querySelector('i');
+                        if (icon) icon.className = iconClass;
+                        hudFsBtn.title = titleText;
+                    }
+                }
+
+                function toggleFullscreen() {
+                    const isNativeFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                    const isClassFS = document.body.classList.contains('fullscreen-mode');
+
+                    if (!isNativeFS && !isClassFS) {
+                        // Request fullscreen
+                        const req = document.documentElement.requestFullscreen ||
+                                    document.documentElement.webkitRequestFullscreen ||
+                                    document.documentElement.mozRequestFullScreen ||
+                                    document.documentElement.msRequestFullscreen;
+                        if (req) {
+                            req.call(document.documentElement).then(() => {
+                                updateFullscreenUI();
+                            }).catch(() => {
+                                // Fallback for iOS Safari / restricted environments
+                                document.body.classList.add('fullscreen-mode');
+                                document.documentElement.classList.add('fullscreen-mode');
+                                updateFullscreenUI();
+                            });
+                        } else {
+                            // Direct simulated fullscreen fallback
+                            document.body.classList.add('fullscreen-mode');
+                            document.documentElement.classList.add('fullscreen-mode');
+                            updateFullscreenUI();
+                        }
+                    } else {
+                        // Exit fullscreen
+                        const exit = document.exitFullscreen ||
+                                     document.webkitExitFullscreen ||
+                                     document.mozCancelFullScreen ||
+                                     document.msExitFullscreen;
+                        if (document.fullscreenElement || document.webkitFullscreenElement) {
+                            if (exit) exit.call(document).catch(() => {});
+                        }
+                        document.body.classList.remove('fullscreen-mode');
+                        document.documentElement.classList.remove('fullscreen-mode');
+                        updateFullscreenUI();
+                    }
+                }
+
+                document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+                const hudFsBtn = document.getElementById('fs-btn-fullscreen');
+                if (hudFsBtn) hudFsBtn.addEventListener('click', toggleFullscreen);
+
+                // Listen to fullscreen changes from browser / OS
+                ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(ev => {
+                    document.addEventListener(ev, updateFullscreenUI);
                 });
+                window.addEventListener('resize', updateFullscreenUI);
+                window.addEventListener('orientationchange', updateFullscreenUI);
+
+                // Fullscreen HUD action listeners
+                const hudTimerToggle = document.getElementById('fs-btn-timer-toggle');
+                if (hudTimerToggle) hudTimerToggle.addEventListener('click', toggleTimer);
+
+                const hudTimerReset = document.getElementById('fs-btn-timer-reset');
+                if (hudTimerReset) hudTimerReset.addEventListener('click', resetTimer);
+
+                const hudSwap = document.getElementById('fs-btn-swap');
+                if (hudSwap) hudSwap.addEventListener('click', swapSides);
+
+                const hudUndo = document.getElementById('fs-btn-undo');
+                if (hudUndo) hudUndo.addEventListener('click', handleUndo);
+
+                const hudSave = document.getElementById('fs-btn-save');
+                if (hudSave) hudSave.addEventListener('click', saveMatchToHistory);
+
+                const hudReset = document.getElementById('fs-btn-reset');
+                if (hudReset) hudReset.addEventListener('click', resetCurrentMatch);
 
                 // Keyboard Shortcuts Modal
                 const shortcutsModal = document.getElementById('shortcuts-modal');
