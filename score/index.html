@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Score Tracker - Red vs Blue Scoreboard</title>
-    <meta name="description" content="Simple and responsive score tracker for badminton, soccer, and general sports. Red and Blue sides, client-side history, and match timer.">
+    <meta name="description" content="Mobile-first score tracker for badminton, soccer, table tennis, volleyball, and general sports. Red and Blue sides, match timer, and client-side history.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="192x192" href="../img/logo_192x192.png">
@@ -64,806 +64,39 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        html, body {
+            height: 100vh;
+            height: 100dvh;
+            max-height: 100vh;
+            max-height: 100dvh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden !important;
             background-color: var(--bg-main);
             color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             user-select: none;
             -webkit-user-select: none;
-        }
-
-        /* Top Header */
-        header {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--bg-card-border);
-            padding: 10px 16px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .home-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 6px 10px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
-        }
-
-        .home-link:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .app-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .app-title span.badge {
-            font-size: 0.7rem;
-            background: #10b981;
-            color: #fff;
-            padding: 2px 7px;
-            border-radius: 999px;
-            text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .icon-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--bg-card-border);
-            color: var(--text-main);
-            border-radius: var(--radius-sm);
-            width: 36px;
-            height: 36px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.95rem;
-        }
-
-        .icon-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .icon-btn:active {
-            transform: scale(0.94);
-        }
-
-        /* Main Container */
-        main {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
-        }
-
-        /* Control / Mode Bar */
-        .settings-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--bg-card-border);
-            padding: 10px 16px;
-            border-radius: var(--radius-md);
-        }
-
-        .sport-selector {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .sport-selector select {
-            background: var(--bg-main);
-            color: var(--text-main);
-            border: 1px solid var(--bg-card-border);
-            padding: 6px 12px;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .sport-selector select:focus {
-            border-color: var(--blue-primary);
-        }
-
-        /* Match Timer Display */
-        .timer-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--bg-card-border);
-            padding: 4px 12px;
-            border-radius: var(--radius-sm);
-        }
-
-        .timer-display {
-            font-family: 'Chakra Petch', monospace;
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #38bdf8;
-            min-width: 65px;
-            text-align: center;
-        }
-
-        .timer-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 4px;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        .timer-btn:hover {
-            color: #fff;
-        }
-
-        /* Scoreboard Grid */
-        .scoreboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            position: relative;
-        }
-
-        @media (max-width: 640px) {
-            .scoreboard-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-        }
-
-        /* Team Card */
-        .team-card {
-            border-radius: var(--radius-lg);
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-            transition: all 0.25s ease;
-            overflow: hidden;
-            min-height: 380px;
-        }
-
-        /* Team Red Theme */
-        .team-card.team-a {
-            background: linear-gradient(180deg, #260a0f 0%, #160609 100%);
-            border: 2px solid var(--red-border);
-        }
-
-        .team-card.team-a:hover {
-            border-color: var(--red-primary);
-            box-shadow: 0 12px 35px var(--red-glow);
-        }
-
-        /* Team Blue Theme */
-        .team-card.team-b {
-            background: linear-gradient(180deg, #091a38 0%, #070f20 100%);
-            border: 2px solid var(--blue-border);
-        }
-
-        .team-card.team-b:hover {
-            border-color: var(--blue-primary);
-            box-shadow: 0 12px 35px var(--blue-glow);
-        }
-
-        /* Team Header & Editable Name */
-        .team-header {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            position: relative;
-        }
-
-        .team-name-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-
-        .team-name-input {
-            background: transparent;
-            border: 1px dashed transparent;
-            color: #fff;
-            font-size: 1.35rem;
-            font-weight: 700;
-            text-align: center;
-            padding: 4px 8px;
-            border-radius: var(--radius-sm);
-            width: 100%;
-            max-width: 220px;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .team-card.team-a .team-name-input {
-            color: #fca5a5;
-        }
-
-        .team-card.team-b .team-name-input {
-            color: #93c5fd;
-        }
-
-        .team-name-input:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .team-name-input:focus {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid #fff;
-            color: #fff;
-        }
-
-        .sets-badge {
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        .sets-badge:hover {
-            background: rgba(255, 255, 255, 0.16);
-            color: #fff;
-        }
-
-        /* Big Score Display */
-        .score-display-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            cursor: pointer;
-            padding: 10px 0;
-            position: relative;
-        }
-
-        .score-number {
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: clamp(4.5rem, 14vw, 9.5rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -2px;
-            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .team-card.team-a .score-number {
-            color: #fee2e2;
-            filter: drop-shadow(0 0 16px var(--red-glow));
-        }
-
-        .team-card.team-b .score-number {
-            color: #dbeafe;
-            filter: drop-shadow(0 0 16px var(--blue-glow));
-        }
-
-        .score-display-wrapper:active .score-number {
-            transform: scale(0.96);
-        }
-
-        .tap-hint {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            opacity: 0.6;
-            margin-top: 4px;
-        }
-
-        /* Action Buttons (+ / -) */
-        .score-controls {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-            max-width: 280px;
-            margin-top: 10px;
-        }
-
-        .btn-score {
-            border: none;
-            border-radius: var(--radius-md);
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-score:active {
-            transform: scale(0.92);
-        }
-
-        .btn-plus {
-            flex: 2;
-            height: 68px;
-            font-size: 2rem;
-            color: #fff;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .team-card.team-a .btn-plus {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .team-card.team-a .btn-plus:hover {
-            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-            box-shadow: 0 8px 24px var(--red-glow);
-        }
-
-        .team-card.team-b .btn-plus {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .team-card.team-b .btn-plus:hover {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-            box-shadow: 0 8px 24px var(--blue-glow);
-        }
-
-        .btn-minus {
-            flex: 1;
-            height: 68px;
-            font-size: 1.4rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: var(--text-main);
-        }
-
-        .btn-minus:hover {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        /* Match Action Bar (Swap, Clear/Reset, Undo, Save) */
-        .actions-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--bg-card-border);
-            border-radius: var(--radius-md);
-        }
-
-        .action-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--bg-card-border);
-            color: var(--text-main);
-            padding: 10px 18px;
-            border-radius: var(--radius-sm);
-            font-size: 0.92rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .action-btn:active {
-            transform: scale(0.96);
-        }
-
-        .action-btn.btn-reset {
-            color: #f87171;
-            border-color: rgba(239, 68, 68, 0.3);
-            background: rgba(239, 68, 68, 0.08);
-        }
-
-        .action-btn.btn-reset:hover {
-            background: rgba(239, 68, 68, 0.2);
-            border-color: #ef4444;
-            color: #fff;
-        }
-
-        .action-btn.btn-save {
-            color: #34d399;
-            border-color: rgba(52, 211, 153, 0.3);
-            background: rgba(52, 211, 153, 0.08);
-        }
-
-        .action-btn.btn-save:hover {
-            background: rgba(52, 211, 153, 0.2);
-            border-color: #34d399;
-            color: #fff;
-        }
-
-        /* History & Timeline Section */
-        .history-section {
-            background: var(--bg-card);
-            border: 1px solid var(--bg-card-border);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            border-bottom: 1px solid var(--bg-card-border);
-            padding-bottom: 12px;
-        }
-
-        .history-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .history-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sm-btn {
-            font-size: 0.8rem;
-            padding: 5px 10px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--bg-card-border);
-            color: var(--text-muted);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s;
-        }
-
-        .sm-btn:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .history-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 380px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        /* Custom Scrollbar */
-        .history-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        .history-list::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-        }
-        .history-list::-webkit-scrollbar-thumb {
-            background: var(--bg-card-border);
-            border-radius: 3px;
-        }
-
-        .history-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--bg-card-border);
-            border-radius: var(--radius-md);
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            transition: background 0.15s;
-        }
-
-        .history-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .history-item-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .history-item-date {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .history-item-sport {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #38bdf8;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .history-score-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .history-team {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .history-team.winner {
-            color: #4ade80;
-        }
-
-        .team-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .team-dot.red { background-color: var(--red-primary); }
-        .team-dot.blue { background-color: var(--blue-primary); }
-
-        .history-score-display {
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 4px 12px;
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            letter-spacing: 1px;
-        }
-
-        .history-empty {
-            text-align: center;
-            padding: 32px 16px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .history-empty i {
-            font-size: 2rem;
-            opacity: 0.4;
-        }
-
-        /* Toast notifications */
-        .toast-container {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            pointer-events: none;
-        }
-
-        .toast {
-            background: #1e293b;
-            color: #fff;
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            border-left: 4px solid #3b82f6;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            animation: slideIn 0.25s ease-out;
-            pointer-events: auto;
-        }
-
-        .toast.success { border-left-color: #10b981; }
-        .toast.warning { border-left-color: #f59e0b; }
-        .toast.danger { border-left-color: #ef4444; }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* Modal styling */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(4px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-            padding: 16px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: var(--bg-card);
-            border: 1px solid var(--bg-card-border);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            max-width: 440px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .modal-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .modal-body {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        /* Keyboard shortcuts drawer / list */
-        .shortcuts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            font-size: 0.85rem;
-        }
-
-        .shortcut-item {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 6px 10px;
-            border-radius: 6px;
-        }
-
-        kbd {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #fff;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px 16px;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: auto;
-        }
-
-        footer a {
-            color: var(--text-muted);
-            text-decoration: underline;
-        }
-
-        footer a:hover {
-            color: #fff;
+            padding-left: max(0px, env(safe-area-inset-left));
+            padding-right: max(0px, env(safe-area-inset-right));
         }
 
         /* ============================================================
-           Fullscreen HUD & Mobile UI Landscape Mode
+           Unified Mobile App Top HUD
            ============================================================ */
-        
-        /* Base Fullscreen HUD (hidden in normal windowed mode) */
-        .fullscreen-hud {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 40px;
+        .app-hud {
+            height: 44px;
             padding: 0 10px;
             background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--bg-card-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
             flex-shrink: 0;
             z-index: 50;
             box-sizing: border-box;
@@ -881,7 +114,7 @@
             color: var(--text-main);
             border-radius: var(--radius-sm);
             height: 32px;
-            padding: 0 10px;
+            padding: 0 9px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -892,11 +125,13 @@
             transition: all 0.15s ease;
             white-space: nowrap;
             touch-action: manipulation;
+            text-decoration: none;
         }
 
         .hud-btn:hover {
             background: rgba(255, 255, 255, 0.18);
             border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
         }
 
         .hud-btn:active {
@@ -927,24 +162,58 @@
             color: #fff;
         }
 
+        /* Sport selector in HUD */
+        .hud-select-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--bg-card-border);
+            border-radius: var(--radius-sm);
+            padding: 0 6px;
+            height: 32px;
+        }
+
+        .hud-select-icon {
+            font-size: 0.75rem;
+            color: #fbbf24;
+        }
+
+        .hud-select {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.8rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            padding-right: 2px;
+        }
+
+        .hud-select option {
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        /* Stopwatch in HUD */
         .hud-timer {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             background: rgba(0, 0, 0, 0.45);
             border: 1px solid var(--bg-card-border);
-            padding: 2px 10px;
+            padding: 2px 8px;
             border-radius: var(--radius-sm);
             height: 32px;
         }
 
         .hud-timer span {
             font-family: 'Chakra Petch', monospace;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             letter-spacing: 1px;
             color: #38bdf8;
-            min-width: 52px;
+            min-width: 48px;
             text-align: center;
         }
 
@@ -954,7 +223,7 @@
             color: var(--text-muted);
             cursor: pointer;
             padding: 2px 4px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -966,351 +235,725 @@
             color: #fff;
         }
 
-        /* Simplified Layout for Mobile Landscape when Fullscreen */
-        @media (orientation: landscape) {
-            :fullscreen,
-            :-webkit-full-screen,
-            html.fullscreen-mode {
-                overflow: hidden !important;
-                height: 100vh !important;
-                height: 100dvh !important;
-            }
+        /* ============================================================
+           Main Scoreboard Grid
+           ============================================================ */
+        main {
+            flex: 1;
+            width: 100%;
+            height: calc(100% - 44px);
+            padding: 6px 8px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
 
-            :fullscreen body,
-            :-webkit-full-screen body,
-            body.fullscreen-mode {
-                height: 100vh !important;
-                height: 100dvh !important;
-                max-height: 100vh !important;
-                max-height: 100dvh !important;
-                overflow: hidden !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                padding-left: max(0px, env(safe-area-inset-left)) !important;
-                padding-right: max(0px, env(safe-area-inset-right)) !important;
-                display: flex !important;
-                flex-direction: column !important;
-            }
+        .scoreboard-grid {
+            flex: 1;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            align-items: stretch;
+            min-height: 0;
+            margin: 0;
+        }
 
-            /* Hide heavy desktop elements in fullscreen landscape */
-            :fullscreen header,
-            :-webkit-full-screen header,
-            body.fullscreen-mode header,
-            :fullscreen .settings-bar,
-            :-webkit-full-screen .settings-bar,
-            body.fullscreen-mode .settings-bar,
-            :fullscreen .actions-bar,
-            :-webkit-full-screen .actions-bar,
-            body.fullscreen-mode .actions-bar,
-            :fullscreen .history-section,
-            :-webkit-full-screen .history-section,
-            body.fullscreen-mode .history-section,
-            :fullscreen footer,
-            :-webkit-full-screen footer,
-            body.fullscreen-mode footer,
-            :fullscreen .tap-hint,
-            :-webkit-full-screen .tap-hint,
-            body.fullscreen-mode .tap-hint {
+        /* Team Card */
+        .team-card {
+            min-height: 0;
+            height: 100%;
+            padding: 6px 10px 8px 10px;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        /* Team Red Theme */
+        .team-card.team-a {
+            background: linear-gradient(180deg, #260a0f 0%, #160609 100%);
+            border: 2px solid var(--red-border);
+        }
+
+        .team-card.team-a:hover {
+            border-color: var(--red-primary);
+            box-shadow: 0 8px 24px var(--red-glow);
+        }
+
+        /* Team Blue Theme */
+        .team-card.team-b {
+            background: linear-gradient(180deg, #091a38 0%, #070f20 100%);
+            border: 2px solid var(--blue-border);
+        }
+
+        .team-card.team-b:hover {
+            border-color: var(--blue-primary);
+            box-shadow: 0 8px 24px var(--blue-glow);
+        }
+
+        /* Team Header: Inline Editable Name + Sets Badge */
+        .team-header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+            padding: 0 2px;
+        }
+
+        .team-name-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            min-width: 0;
+        }
+
+        .team-name-input {
+            background: transparent;
+            border: 1px dashed transparent;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-align: left;
+            padding: 2px 4px;
+            border-radius: var(--radius-sm);
+            width: 100%;
+            max-width: 140px;
+            outline: none;
+            transition: all 0.2s;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .team-card.team-a .team-name-input { color: #fca5a5; }
+        .team-card.team-b .team-name-input { color: #93c5fd; }
+
+        .team-name-input:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .team-name-input:focus {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #fff;
+            color: #fff;
+        }
+
+        .sets-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .sets-badge:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+        }
+
+        /* Massive Touch-Optimized Score Display */
+        .score-display-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            touch-action: manipulation;
+        }
+
+        .score-number {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: min(34vh, 20vw);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            user-select: none;
+        }
+
+        .team-card.team-a .score-number {
+            color: #fee2e2;
+            filter: drop-shadow(0 0 16px var(--red-glow));
+        }
+
+        .team-card.team-b .score-number {
+            color: #dbeafe;
+            filter: drop-shadow(0 0 16px var(--blue-glow));
+        }
+
+        .score-display-wrapper:active .score-number {
+            transform: scale(0.96);
+        }
+
+        /* Action Buttons (+ / -) */
+        .score-controls {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: 4px;
+            touch-action: manipulation;
+        }
+
+        .btn-score {
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .btn-score:active {
+            transform: scale(0.92);
+        }
+
+        .btn-plus {
+            flex: 3;
+            height: 46px;
+            font-size: 1.5rem;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-card.team-a .btn-plus {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .team-card.team-a .btn-plus:hover {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            box-shadow: 0 6px 18px var(--red-glow);
+        }
+
+        .team-card.team-b .btn-plus {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .team-card.team-b .btn-plus:hover {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            box-shadow: 0 6px 18px var(--blue-glow);
+        }
+
+        .btn-minus {
+            flex: 1;
+            height: 46px;
+            font-size: 1.15rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-main);
+        }
+
+        .btn-minus:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ============================================================
+           Bottom Action Bar (Mobile Portrait Mode)
+           ============================================================ */
+        .bottom-bar {
+            display: none;
+            height: 48px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--bg-card-border);
+            padding: 0 6px;
+            align-items: center;
+            justify-content: space-around;
+            gap: 4px;
+            flex-shrink: 0;
+            z-index: 50;
+            padding-bottom: max(0px, env(safe-area-inset-bottom));
+            box-sizing: border-box;
+        }
+
+        .bottom-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 6px;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            transition: all 0.15s ease;
+            flex: 1;
+            touch-action: manipulation;
+        }
+
+        .bottom-btn i {
+            font-size: 0.95rem;
+        }
+
+        .bottom-btn:hover, .bottom-btn:active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .bottom-btn-save { color: #34d399; }
+        .bottom-btn-reset { color: #f87171; }
+
+        /* ============================================================
+           Portrait vs Landscape Responsive Styling
+           ============================================================ */
+        @media (orientation: portrait) {
+            .bottom-bar {
+                display: flex;
+            }
+            .hud-actions-desktop {
                 display: none !important;
             }
-
-            /* Show the dedicated streamlined top HUD */
-            :fullscreen .fullscreen-hud,
-            :-webkit-full-screen .fullscreen-hud,
-            body.fullscreen-mode .fullscreen-hud {
-                display: flex !important;
+            main {
+                height: calc(100% - 44px - 48px);
+                padding-bottom: 4px;
             }
-
-            /* Main viewport fills 100% height without scrolling */
-            :fullscreen main,
-            :-webkit-full-screen main,
-            body.fullscreen-mode main {
-                max-width: 100% !important;
-                width: 100% !important;
-                height: 100vh !important;
-                height: 100dvh !important;
-                padding: 0 8px 6px 8px !important;
-                margin: 0 !important;
-                gap: 4px !important;
-                display: flex !important;
-                flex-direction: column !important;
-                overflow: hidden !important;
-                box-sizing: border-box !important;
-                padding-bottom: max(6px, env(safe-area-inset-bottom)) !important;
+            .score-number {
+                font-size: clamp(4.5rem, 20vw, 9rem);
             }
-
-            /* Scoreboard grid: 2 equal columns taking full remaining height */
-            :fullscreen .scoreboard-grid,
-            :-webkit-full-screen .scoreboard-grid,
-            body.fullscreen-mode .scoreboard-grid {
-                flex: 1 !important;
-                height: calc(100% - 46px) !important;
-                gap: 8px !important;
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                align-items: stretch !important;
-                margin: 0 !important;
-            }
-
-            /* Team Card: compact, thumb-optimized, zero vertical overflow */
-            :fullscreen .team-card,
-            :-webkit-full-screen .team-card,
-            body.fullscreen-mode .team-card {
-                min-height: 0 !important;
-                height: 100% !important;
-                padding: 6px 10px 8px 10px !important;
-                border-radius: var(--radius-md) !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                overflow: hidden !important;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
-            }
-
-            /* Compact Team Header: Name & Sets badge inline on one row */
-            :fullscreen .team-header,
-            :-webkit-full-screen .team-header,
-            body.fullscreen-mode .team-header {
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                width: 100% !important;
-                padding: 0 4px !important;
-                gap: 6px !important;
-            }
-
-            :fullscreen .team-name-wrapper,
-            :-webkit-full-screen .team-name-wrapper,
-            body.fullscreen-mode .team-name-wrapper {
-                width: auto !important;
-                flex: 1 !important;
-                justify-content: flex-start !important;
-            }
-
-            :fullscreen .team-name-input,
-            :-webkit-full-screen .team-name-input,
-            body.fullscreen-mode .team-name-input {
-                font-size: 1.05rem !important;
-                padding: 2px 4px !important;
-                max-width: 140px !important;
-                text-align: left !important;
-            }
-
-            :fullscreen .sets-badge,
-            :-webkit-full-screen .sets-badge,
-            body.fullscreen-mode .sets-badge {
-                font-size: 0.72rem !important;
-                padding: 2px 8px !important;
-                white-space: nowrap !important;
-                flex-shrink: 0 !important;
-            }
-
-            /* Big Score Display: centered, massive legible digits */
-            :fullscreen .score-display-wrapper,
-            :-webkit-full-screen .score-display-wrapper,
-            body.fullscreen-mode .score-display-wrapper {
-                flex: 1 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                cursor: pointer !important;
-                touch-action: manipulation;
-            }
-
-            :fullscreen .score-number,
-            :-webkit-full-screen .score-number,
-            body.fullscreen-mode .score-number {
-                font-size: min(32vh, 18vw) !important;
-                line-height: 1 !important;
-                letter-spacing: -2px !important;
-            }
-
-            /* Compact Score Controls (+ / -) at bottom of card */
-            :fullscreen .score-controls,
-            :-webkit-full-screen .score-controls,
-            body.fullscreen-mode .score-controls {
-                width: 100% !important;
-                max-width: 100% !important;
-                margin-top: 4px !important;
-                gap: 8px !important;
-                touch-action: manipulation;
-            }
-
-            :fullscreen .btn-plus,
-            :-webkit-full-screen .btn-plus,
-            body.fullscreen-mode .btn-plus {
-                height: 42px !important;
-                font-size: 1.4rem !important;
-                border-radius: var(--radius-sm) !important;
-                flex: 3 !important;
-                touch-action: manipulation;
-            }
-
-            :fullscreen .btn-minus,
-            :-webkit-full-screen .btn-minus,
-            body.fullscreen-mode .btn-minus {
-                height: 42px !important;
-                font-size: 1.1rem !important;
-                border-radius: var(--radius-sm) !important;
-                flex: 1 !important;
-                touch-action: manipulation;
-            }
-
-            /* Dialogs & Toasts in fullscreen landscape */
-            :fullscreen .toast-container,
-            :-webkit-full-screen .toast-container,
-            body.fullscreen-mode .toast-container {
-                bottom: 10px !important;
-                right: 10px !important;
-                max-width: 320px !important;
-            }
-
-            :fullscreen .toast,
-            :-webkit-full-screen .toast,
-            body.fullscreen-mode .toast {
-                padding: 6px 12px !important;
-                font-size: 0.8rem !important;
-            }
-
-            :fullscreen .modal-box,
-            :-webkit-full-screen .modal-box,
-            body.fullscreen-mode .modal-box {
-                padding: 16px !important;
-                max-height: 90vh !important;
-                overflow-y: auto !important;
+            .btn-plus, .btn-minus {
+                height: 52px;
             }
         }
 
-        /* Compact widths in landscape (e.g. iPhone SE / smaller phones <= 720px) */
-        @media (orientation: landscape) and (max-width: 720px) {
+        @media (orientation: landscape) {
+            .bottom-bar {
+                display: none !important;
+            }
+            .hud-actions-desktop {
+                display: flex !important;
+            }
+            main {
+                height: calc(100% - 44px);
+                padding-bottom: max(6px, env(safe-area-inset-bottom));
+            }
+            .score-number {
+                font-size: min(34vh, 20vw);
+            }
+        }
+
+        @media (max-width: 720px) {
             .hud-btn-label {
                 display: none !important;
             }
             .hud-btn {
-                padding: 0 8px !important;
+                padding: 0 7px;
             }
-            :fullscreen .team-name-input,
-            :-webkit-full-screen .team-name-input,
-            body.fullscreen-mode .team-name-input {
-                max-width: 105px !important;
-                font-size: 0.95rem !important;
+            .team-name-input {
+                max-width: 105px;
+                font-size: 0.95rem;
             }
             .hud-timer span {
-                font-size: 0.95rem !important;
-                min-width: 44px !important;
+                font-size: 0.95rem;
+                min-width: 44px;
             }
+        }
+
+        /* ============================================================
+           Modals & Overlays
+           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 14px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-card-border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            max-width: 440px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            animation: modalFadeIn 0.2s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-history-box {
+            max-width: 540px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-body {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .modal-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--bg-card-border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+        }
+
+        .modal-btn.btn-danger {
+            color: #fff;
+            background: #ef4444;
+            border-color: #dc2626;
+        }
+        .modal-btn.btn-danger:hover {
+            background: #dc2626;
+        }
+
+        /* History List Inside Modal */
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid var(--bg-card-border);
+            padding-bottom: 10px;
+        }
+
+        .history-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sm-btn {
+            font-size: 0.78rem;
+            padding: 4px 9px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--bg-card-border);
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .sm-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 50vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .history-list::-webkit-scrollbar-thumb {
+            background: var(--bg-card-border);
+            border-radius: 3px;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--bg-card-border);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.15s;
+        }
+
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .history-item-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .history-item-date {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .history-item-sport {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .history-score-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .history-team {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .history-team.winner {
+            color: #4ade80;
+        }
+
+        .team-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .team-dot.red { background-color: var(--red-primary); }
+        .team-dot.blue { background-color: var(--blue-primary); }
+
+        .history-score-display {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 3px 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            letter-spacing: 1px;
+        }
+
+        .history-empty {
+            text-align: center;
+            padding: 28px 14px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .history-empty i {
+            font-size: 2rem;
+            opacity: 0.35;
+        }
+
+        /* Keyboard Shortcuts in Modal */
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 0.82rem;
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        kbd {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.78rem;
+            color: #fff;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 60px;
+            right: 14px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: #1e293b;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid #3b82f6;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            animation: slideIn 0.25s ease-out;
+            pointer-events: auto;
+        }
+
+        .toast.success { border-left-color: #10b981; }
+        .toast.warning { border-left-color: #f59e0b; }
+        .toast.danger { border-left-color: #ef4444; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header>
-        <div class="header-content">
-            <div class="brand-area">
-                <a href="../" class="home-link" title="Back to Homepage">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Home</span>
-                </a>
-                <div class="app-title">
-                    <i class="fas fa-trophy" style="color: #fbbf24;"></i>
-                    <span>Scoreboard</span>
-                    <span class="badge">Live</span>
-                </div>
+    <!-- Unified Mobile Top HUD -->
+    <header class="app-hud" id="app-hud" aria-label="Scoreboard Navigation and Controls">
+        <div class="hud-group hud-left">
+            <a href="../" class="hud-btn" id="btn-home" title="Back to Homepage">
+                <i class="fas fa-arrow-left"></i>
+                <span class="hud-btn-label">Home</span>
+            </a>
+            <div class="hud-select-wrapper" title="Sport Preset">
+                <i class="fas fa-medal hud-select-icon"></i>
+                <select id="sport-mode" class="hud-select" aria-label="Sport Selection">
+                    <option value="general">General</option>
+                    <option value="badminton">Badminton (21)</option>
+                    <option value="soccer">Soccer</option>
+                    <option value="table_tennis">Table Tennis (11)</option>
+                    <option value="volleyball">Volleyball (25)</option>
+                </select>
             </div>
+            <button id="btn-sound-toggle" class="hud-btn" title="Toggle Sound Feedback">
+                <i class="fas fa-volume-high"></i>
+            </button>
+        </div>
 
-            <div class="header-actions">
-                <button id="btn-sound-toggle" class="icon-btn" title="Toggle Sound Feedback">
-                    <i class="fas fa-volume-high"></i>
+        <div class="hud-group hud-center">
+            <div class="hud-timer" title="Match Duration Stopwatch">
+                <i class="far fa-clock" style="color: var(--text-muted);"></i>
+                <span id="timer-display">00:00</span>
+                <button id="btn-timer-toggle" class="hud-timer-btn" title="Start / Pause Timer">
+                    <i class="fas fa-play"></i>
                 </button>
-                <button id="btn-shortcuts" class="icon-btn" title="Keyboard Shortcuts (?)">
-                    <i class="fas fa-keyboard"></i>
-                </button>
-                <button id="btn-fullscreen" class="icon-btn" title="Fullscreen Mode">
-                    <i class="fas fa-expand"></i>
+                <button id="btn-timer-reset" class="hud-timer-btn" title="Reset Timer">
+                    <i class="fas fa-rotate-left"></i>
                 </button>
             </div>
         </div>
-    </header>
 
-    <!-- Main Score App -->
-    <main>
-        <!-- Simplified Fullscreen HUD (Mobile Landscape) -->
-        <div class="fullscreen-hud" id="fullscreen-hud" aria-label="Fullscreen Controls">
-            <div class="hud-group hud-left">
-                <button id="fs-btn-fullscreen" class="hud-btn" title="Exit Fullscreen Mode">
-                    <i class="fas fa-compress"></i>
-                </button>
-                <button id="fs-btn-sound" class="hud-btn" title="Toggle Sound Feedback">
-                    <i class="fas fa-volume-high"></i>
-                </button>
-            </div>
-
-            <div class="hud-group hud-center">
-                <div class="hud-timer" title="Match Duration Stopwatch">
-                    <i class="far fa-clock" style="color: var(--text-muted);"></i>
-                    <span id="fs-timer-display">00:00</span>
-                    <button id="fs-btn-timer-toggle" class="hud-timer-btn" title="Start / Pause Timer">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button id="fs-btn-timer-reset" class="hud-timer-btn" title="Reset Timer">
-                        <i class="fas fa-rotate-left"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="hud-group hud-right">
-                <button id="fs-btn-swap" class="hud-btn" title="Swap Teams Red and Blue (S)">
+        <div class="hud-group hud-right">
+            <!-- Action buttons visible in Landscape -->
+            <div class="hud-group hud-actions-desktop">
+                <button id="btn-swap-sides" class="hud-btn" title="Swap Sides (S)">
                     <i class="fas fa-repeat"></i>
                     <span class="hud-btn-label">Swap</span>
                 </button>
-                <button id="fs-btn-undo" class="hud-btn" title="Undo Last Point (U)">
+                <button id="btn-undo" class="hud-btn" title="Undo Last Point (U)">
                     <i class="fas fa-rotate-left"></i>
                     <span class="hud-btn-label">Undo</span>
                 </button>
-                <button id="fs-btn-save" class="hud-btn hud-btn-save" title="Save Match to History">
+                <button id="btn-save-match" class="hud-btn hud-btn-save" title="Save Match to History">
                     <i class="fas fa-floppy-disk"></i>
                     <span class="hud-btn-label">Save</span>
                 </button>
-                <button id="fs-btn-reset" class="hud-btn hud-btn-reset" title="Reset Scores to 0 (R)">
+                <button id="btn-history" class="hud-btn" title="Match History">
+                    <i class="fas fa-clock-rotate-left"></i>
+                    <span class="hud-btn-label">History</span>
+                </button>
+                <button id="btn-reset-match" class="hud-btn hud-btn-reset" title="Reset Scores to 0 (R)">
                     <i class="fas fa-trash-can"></i>
                     <span class="hud-btn-label">Reset</span>
                 </button>
             </div>
+
+            <button id="btn-shortcuts" class="hud-btn" title="Keyboard Shortcuts (?)">
+                <i class="fas fa-keyboard"></i>
+            </button>
+            <button id="btn-fullscreen" class="hud-btn" title="Fullscreen Mode">
+                <i class="fas fa-expand"></i>
+            </button>
         </div>
+    </header>
 
-        <!-- Settings & Mode Toolbar -->
-        <div class="settings-bar">
-            <div class="sport-selector">
-                <i class="fas fa-medal"></i>
-                <label for="sport-mode">Sport Mode:</label>
-                <select id="sport-mode">
-                    <option value="general">General (Free Play)</option>
-                    <option value="badminton">Badminton (21 Pts)</option>
-                    <option value="soccer">Soccer / Football</option>
-                    <option value="table_tennis">Table Tennis (11 Pts)</option>
-                    <option value="volleyball">Volleyball (25 Pts)</option>
-                </select>
-            </div>
-
-            <!-- Match Timer -->
-            <div class="timer-container" title="Match Duration Stopwatch">
-                <i class="far fa-clock" style="color: var(--text-muted);"></i>
-                <div id="timer-display" class="timer-display">00:00</div>
-                <button id="btn-timer-toggle" class="timer-btn" title="Start / Pause Timer">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button id="btn-timer-reset" class="timer-btn" title="Reset Timer">
-                    <i class="fas fa-rotate-left"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- The Scoreboard (Red vs Blue / A vs B) -->
+    <!-- Main Scoreboard -->
+    <main>
         <div class="scoreboard-grid" id="scoreboard-grid">
             
             <!-- Side A: RED -->
@@ -1325,13 +968,12 @@
                     </div>
                 </div>
 
-                <!-- Big Score -->
+                <!-- Big Score Number -->
                 <div class="score-display-wrapper" id="display-team-a" title="Tap here or big + to add point">
                     <div class="score-number" id="score-team-a">0</div>
-                    <div class="tap-hint">+1 Point</div>
                 </div>
 
-                <!-- Score Buttons (+ / -) -->
+                <!-- Score Controls (+ / -) -->
                 <div class="score-controls">
                     <button class="btn-score btn-plus" id="btn-plus-a" aria-label="Increase Team Red Score">
                         <i class="fas fa-plus"></i>
@@ -1354,13 +996,12 @@
                     </div>
                 </div>
 
-                <!-- Big Score -->
+                <!-- Big Score Number -->
                 <div class="score-display-wrapper" id="display-team-b" title="Tap here or big + to add point">
                     <div class="score-number" id="score-team-b">0</div>
-                    <div class="tap-hint">+1 Point</div>
                 </div>
 
-                <!-- Score Buttons (+ / -) -->
+                <!-- Score Controls (+ / -) -->
                 <div class="score-controls">
                     <button class="btn-score btn-plus" id="btn-plus-b" aria-label="Increase Team Blue Score">
                         <i class="fas fa-plus"></i>
@@ -1372,31 +1013,54 @@
             </section>
 
         </div>
+    </main>
 
-        <!-- Quick Action Bar -->
-        <div class="actions-bar">
-            <button class="action-btn" id="btn-swap-sides" title="Swap Teams Red and Blue sides">
-                <i class="fas fa-repeat"></i>
-                <span>Swap Sides</span>
-            </button>
-            <button class="action-btn" id="btn-undo" title="Undo last point (Ctrl+Z or U)">
-                <i class="fas fa-rotate-left"></i>
-                <span>Undo</span>
-            </button>
-            <button class="action-btn btn-save" id="btn-save-match" title="Save current match result to history">
-                <i class="fas fa-floppy-disk"></i>
-                <span>Save Match</span>
-            </button>
-            <button class="action-btn btn-reset" id="btn-reset-match" title="Reset scores to 0">
-                <i class="fas fa-trash-can"></i>
-                <span>Clear / Reset</span>
-            </button>
+    <!-- Bottom Action Bar (Thumb-friendly in Mobile Portrait) -->
+    <nav class="bottom-bar" id="bottom-bar" aria-label="Mobile Score Controls">
+        <button id="bottom-btn-swap" class="bottom-btn" title="Swap Sides (S)">
+            <i class="fas fa-repeat"></i>
+            <span>Swap</span>
+        </button>
+        <button id="bottom-btn-undo" class="bottom-btn" title="Undo Last Point (U)">
+            <i class="fas fa-rotate-left"></i>
+            <span>Undo</span>
+        </button>
+        <button id="bottom-btn-save" class="bottom-btn bottom-btn-save" title="Save Match">
+            <i class="fas fa-floppy-disk"></i>
+            <span>Save</span>
+        </button>
+        <button id="bottom-btn-history" class="bottom-btn" title="Match History">
+            <i class="fas fa-clock-rotate-left"></i>
+            <span>History</span>
+        </button>
+        <button id="bottom-btn-reset" class="bottom-btn bottom-btn-reset" title="Reset Scores">
+            <i class="fas fa-trash-can"></i>
+            <span>Reset</span>
+        </button>
+    </nav>
+
+    <!-- Modal: Confirmation Dialog -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal-box">
+            <div class="modal-title">
+                <i class="fas fa-triangle-exclamation" style="color: #f59e0b;"></i>
+                <span id="confirm-modal-title">Confirm Action</span>
+            </div>
+            <div class="modal-body" id="confirm-modal-body">
+                Are you sure you want to proceed?
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn" id="confirm-modal-cancel">Cancel</button>
+                <button class="modal-btn btn-danger" id="confirm-modal-ok">Confirm</button>
+            </div>
         </div>
+    </div>
 
-        <!-- History Section (Client-Side / LocalStorage) -->
-        <section class="history-section">
+    <!-- Modal: Match History -->
+    <div class="modal-overlay" id="history-modal">
+        <div class="modal-box modal-history-box">
             <div class="history-header">
-                <div class="history-title">
+                <div class="modal-title">
                     <i class="fas fa-clock-rotate-left" style="color: #60a5fa;"></i>
                     <span>Match History</span>
                     <span id="history-count" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">(0 saved)</span>
@@ -1418,25 +1082,12 @@
                 <div class="history-empty">
                     <i class="fas fa-clipboard-list"></i>
                     <p>No matches recorded yet in this browser.</p>
-                    <span style="font-size: 0.8rem;">Click "Save Match" to log final results here!</span>
+                    <span style="font-size: 0.8rem;">Click "Save" to log final results here!</span>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <!-- Modal: Confirmation Dialog -->
-    <div class="modal-overlay" id="confirm-modal">
-        <div class="modal-box">
-            <div class="modal-title">
-                <i class="fas fa-triangle-exclamation" style="color: #f59e0b;"></i>
-                <span id="confirm-modal-title">Confirm Action</span>
-            </div>
-            <div class="modal-body" id="confirm-modal-body">
-                Are you sure you want to proceed?
-            </div>
             <div class="modal-actions">
-                <button class="action-btn" id="confirm-modal-cancel">Cancel</button>
-                <button class="action-btn btn-reset" id="confirm-modal-ok">Confirm</button>
+                <button class="modal-btn" id="history-modal-close">Close</button>
             </div>
         </div>
     </div>
@@ -1461,7 +1112,7 @@
                 </div>
             </div>
             <div class="modal-actions">
-                <button class="action-btn" id="shortcuts-modal-close">Close</button>
+                <button class="modal-btn" id="shortcuts-modal-close">Close</button>
             </div>
         </div>
     </div>
@@ -1469,17 +1120,12 @@
     <!-- Toast Notifications Container -->
     <div class="toast-container" id="toast-container"></div>
 
-    <!-- Footer -->
-    <footer>
-        <p>Simple Red & Blue Score Tracker &bull; Client-Side Storage &bull; <a href="../">Return to Venantius Galih</a></p>
-    </footer>
-
     <!-- JavaScript Application Logic -->
     <script>
         (function() {
             'use strict';
 
-            // Storage Key
+            // Storage Keys
             const STORAGE_KEY = 'v_scoreboard_history_v1';
             const STATE_KEY = 'v_scoreboard_state_v1';
 
@@ -1519,9 +1165,9 @@
             const historyListEl = document.getElementById('history-list');
             const historyCountEl = document.getElementById('history-count');
             const toastContainer = document.getElementById('toast-container');
-            const scoreboardGrid = document.getElementById('scoreboard-grid');
-            const cardTeamA = document.getElementById('card-team-a');
-            const cardTeamB = document.getElementById('card-team-b');
+            const historyModal = document.getElementById('history-modal');
+            const shortcutsModal = document.getElementById('shortcuts-modal');
+            const confirmModal = document.getElementById('confirm-modal');
 
             // Web Audio API for synthetic feedback
             let audioCtx = null;
@@ -1597,7 +1243,6 @@
 
             // Modal Helper
             function showConfirmModal({ title, message, onConfirm }) {
-                const modal = document.getElementById('confirm-modal');
                 const titleEl = document.getElementById('confirm-modal-title');
                 const bodyEl = document.getElementById('confirm-modal-body');
                 const okBtn = document.getElementById('confirm-modal-ok');
@@ -1605,10 +1250,10 @@
 
                 titleEl.textContent = title || 'Confirm Action';
                 bodyEl.textContent = message || 'Are you sure?';
-                modal.classList.add('active');
+                confirmModal.classList.add('active');
 
                 const cleanup = () => {
-                    modal.classList.remove('active');
+                    confirmModal.classList.remove('active');
                     okBtn.onclick = null;
                     cancelBtn.onclick = null;
                 };
@@ -1648,13 +1293,6 @@
                 if (soundIcon) soundIcon.className = soundIconClass;
                 soundToggleBtn.title = soundTitle;
 
-                const fsSoundBtn = document.getElementById('fs-btn-sound');
-                if (fsSoundBtn) {
-                    const fsIcon = fsSoundBtn.querySelector('i');
-                    if (fsIcon) fsIcon.className = soundIconClass;
-                    fsSoundBtn.title = soundTitle;
-                }
-
                 // Save active session to localStorage
                 saveCurrentState();
 
@@ -1674,7 +1312,6 @@
                 const diff = Math.abs(state.scoreA - state.scoreB);
                 if ((state.scoreA >= target || state.scoreB >= target) && diff >= 2) {
                     const winner = state.scoreA > state.scoreB ? state.nameA : state.nameB;
-                    // Trigger visual hint
                     showToast(`Game point reached! ${winner} is in winning position!`, 'success');
                 }
             }
@@ -1728,7 +1365,6 @@
 
             // Swap Sides
             function swapSides() {
-                // Swap scores, names, sets
                 const tempScore = state.scoreA;
                 const tempName = state.nameA;
                 const tempSets = state.setsA;
@@ -1750,7 +1386,7 @@
             function resetCurrentMatch() {
                 showConfirmModal({
                     title: 'Reset Scores?',
-                    message: 'Do you want to reset scores back to 0? (You can save this match to history first if you wish).',
+                    message: 'Do you want to reset scores back to 0? (You can save this match to history first).',
                     onConfirm: () => {
                         pushUndo();
                         state.scoreA = 0;
@@ -1794,12 +1430,12 @@
                 };
 
                 const history = getHistory();
-                history.unshift(matchRecord); // newest first
+                history.unshift(matchRecord);
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
 
                 playBeep('win');
                 renderHistory();
-                showToast('Match saved to browser history!', 'success');
+                showToast('Match saved to history!', 'success');
             }
 
             // LocalStorage History Helpers
@@ -1858,7 +1494,7 @@
                         <div class="history-empty">
                             <i class="fas fa-clipboard-list"></i>
                             <p>No matches recorded yet in this browser.</p>
-                            <span style="font-size: 0.8rem;">Click "Save Match" to log final results here!</span>
+                            <span style="font-size: 0.8rem;">Click "Save" to log final results here!</span>
                         </div>
                     `;
                     return;
@@ -1947,20 +1583,12 @@
             function updateTimerUI() {
                 const formatted = formatTime(timerSeconds);
                 timerDisplayEl.textContent = formatted;
-                const fsDisplay = document.getElementById('fs-timer-display');
-                if (fsDisplay) fsDisplay.textContent = formatted;
 
                 const iconHTML = timerRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
                 const titleText = timerRunning ? 'Pause Timer' : (timerSeconds > 0 ? 'Resume Timer' : 'Start Timer');
 
                 timerToggleBtn.innerHTML = iconHTML;
                 timerToggleBtn.title = titleText;
-
-                const fsToggleBtn = document.getElementById('fs-btn-timer-toggle');
-                if (fsToggleBtn) {
-                    fsToggleBtn.innerHTML = iconHTML;
-                    fsToggleBtn.title = titleText;
-                }
             }
 
             function toggleTimer() {
@@ -1973,10 +1601,7 @@
                     updateTimerUI();
                     timerInterval = setInterval(() => {
                         timerSeconds++;
-                        const formatted = formatTime(timerSeconds);
-                        timerDisplayEl.textContent = formatted;
-                        const fsDisplay = document.getElementById('fs-timer-display');
-                        if (fsDisplay) fsDisplay.textContent = formatted;
+                        timerDisplayEl.textContent = formatTime(timerSeconds);
                     }, 1000);
                 }
             }
@@ -2022,6 +1647,42 @@
                 });
             }
 
+            // Fullscreen Management
+            function updateFullscreenUI() {
+                const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                const iconClass = isFS ? 'fas fa-compress' : 'fas fa-expand';
+                const titleText = isFS ? 'Exit Fullscreen' : 'Fullscreen Mode';
+
+                const mainFsBtn = document.getElementById('btn-fullscreen');
+                if (mainFsBtn) {
+                    const icon = mainFsBtn.querySelector('i');
+                    if (icon) icon.className = iconClass;
+                    mainFsBtn.title = titleText;
+                }
+            }
+
+            function toggleFullscreen() {
+                const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+
+                if (!isFS) {
+                    const req = document.documentElement.requestFullscreen ||
+                                document.documentElement.webkitRequestFullscreen ||
+                                document.documentElement.mozRequestFullScreen ||
+                                document.documentElement.msRequestFullscreen;
+                    if (req) {
+                        req.call(document.documentElement).catch(() => {});
+                    }
+                } else {
+                    const exit = document.exitFullscreen ||
+                                 document.webkitExitFullscreen ||
+                                 document.mozCancelFullScreen ||
+                                 document.msExitFullscreen;
+                    if (exit) {
+                        exit.call(document).catch(() => {});
+                    }
+                }
+            }
+
             // Event Listeners Initialization
             function initEventListeners() {
                 // Score buttons
@@ -2054,16 +1715,6 @@
                 timerToggleBtn.addEventListener('click', toggleTimer);
                 timerResetBtn.addEventListener('click', resetTimer);
 
-                // Actions bar
-                document.getElementById('btn-swap-sides').addEventListener('click', swapSides);
-                document.getElementById('btn-undo').addEventListener('click', handleUndo);
-                document.getElementById('btn-save-match').addEventListener('click', saveMatchToHistory);
-                document.getElementById('btn-reset-match').addEventListener('click', resetCurrentMatch);
-
-                // History controls
-                document.getElementById('btn-export-history').addEventListener('click', exportHistory);
-                document.getElementById('btn-clear-history').addEventListener('click', clearAllHistory);
-
                 // Sound toggle helper
                 function toggleSound() {
                     state.soundEnabled = !state.soundEnabled;
@@ -2071,113 +1722,48 @@
                     updateUI();
                     showToast(state.soundEnabled ? 'Sound enabled' : 'Sound muted', 'info');
                 }
-
                 soundToggleBtn.addEventListener('click', toggleSound);
-                const fsSoundBtn = document.getElementById('fs-btn-sound');
-                if (fsSoundBtn) fsSoundBtn.addEventListener('click', toggleSound);
 
-                // Fullscreen management & layout synchronization
-                function updateFullscreenUI() {
-                    const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('fullscreen-mode'));
+                // Actions (Top HUD and Bottom bar listeners)
+                const swapButtons = [document.getElementById('btn-swap-sides'), document.getElementById('bottom-btn-swap')];
+                swapButtons.forEach(btn => { if (btn) btn.addEventListener('click', swapSides); });
 
-                    if (isFS) {
-                        document.body.classList.add('fullscreen-mode');
-                        document.documentElement.classList.add('fullscreen-mode');
-                    } else {
-                        document.body.classList.remove('fullscreen-mode');
-                        document.documentElement.classList.remove('fullscreen-mode');
-                    }
+                const undoButtons = [document.getElementById('btn-undo'), document.getElementById('bottom-btn-undo')];
+                undoButtons.forEach(btn => { if (btn) btn.addEventListener('click', handleUndo); });
 
-                    const iconClass = isFS ? 'fas fa-compress' : 'fas fa-expand';
-                    const titleText = isFS ? 'Exit Fullscreen' : 'Fullscreen Mode';
+                const saveButtons = [document.getElementById('btn-save-match'), document.getElementById('bottom-btn-save')];
+                saveButtons.forEach(btn => { if (btn) btn.addEventListener('click', saveMatchToHistory); });
 
-                    const mainFsBtn = document.getElementById('btn-fullscreen');
-                    if (mainFsBtn) {
-                        const icon = mainFsBtn.querySelector('i');
-                        if (icon) icon.className = iconClass;
-                        mainFsBtn.title = titleText;
-                    }
+                const resetButtons = [document.getElementById('btn-reset-match'), document.getElementById('bottom-btn-reset')];
+                resetButtons.forEach(btn => { if (btn) btn.addEventListener('click', resetCurrentMatch); });
 
-                    const hudFsBtn = document.getElementById('fs-btn-fullscreen');
-                    if (hudFsBtn) {
-                        const icon = hudFsBtn.querySelector('i');
-                        if (icon) icon.className = iconClass;
-                        hudFsBtn.title = titleText;
-                    }
+                // History Modal Toggle
+                function openHistoryModal() {
+                    renderHistory();
+                    historyModal.classList.add('active');
+                }
+                function closeHistoryModal() {
+                    historyModal.classList.remove('active');
                 }
 
-                function toggleFullscreen() {
-                    const isNativeFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
-                    const isClassFS = document.body.classList.contains('fullscreen-mode');
+                const historyButtons = [document.getElementById('btn-history'), document.getElementById('bottom-btn-history')];
+                historyButtons.forEach(btn => { if (btn) btn.addEventListener('click', openHistoryModal); });
+                document.getElementById('history-modal-close').addEventListener('click', closeHistoryModal);
+                historyModal.addEventListener('click', (e) => {
+                    if (e.target === historyModal) closeHistoryModal();
+                });
 
-                    if (!isNativeFS && !isClassFS) {
-                        // Request fullscreen
-                        const req = document.documentElement.requestFullscreen ||
-                                    document.documentElement.webkitRequestFullscreen ||
-                                    document.documentElement.mozRequestFullScreen ||
-                                    document.documentElement.msRequestFullscreen;
-                        if (req) {
-                            req.call(document.documentElement).then(() => {
-                                updateFullscreenUI();
-                            }).catch(() => {
-                                // Fallback for iOS Safari / restricted environments
-                                document.body.classList.add('fullscreen-mode');
-                                document.documentElement.classList.add('fullscreen-mode');
-                                updateFullscreenUI();
-                            });
-                        } else {
-                            // Direct simulated fullscreen fallback
-                            document.body.classList.add('fullscreen-mode');
-                            document.documentElement.classList.add('fullscreen-mode');
-                            updateFullscreenUI();
-                        }
-                    } else {
-                        // Exit fullscreen
-                        const exit = document.exitFullscreen ||
-                                     document.webkitExitFullscreen ||
-                                     document.mozCancelFullScreen ||
-                                     document.msExitFullscreen;
-                        if (document.fullscreenElement || document.webkitFullscreenElement) {
-                            if (exit) exit.call(document).catch(() => {});
-                        }
-                        document.body.classList.remove('fullscreen-mode');
-                        document.documentElement.classList.remove('fullscreen-mode');
-                        updateFullscreenUI();
-                    }
-                }
+                // History data operations
+                document.getElementById('btn-export-history').addEventListener('click', exportHistory);
+                document.getElementById('btn-clear-history').addEventListener('click', clearAllHistory);
 
+                // Fullscreen
                 document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
-                const hudFsBtn = document.getElementById('fs-btn-fullscreen');
-                if (hudFsBtn) hudFsBtn.addEventListener('click', toggleFullscreen);
-
-                // Listen to fullscreen changes from browser / OS
                 ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(ev => {
                     document.addEventListener(ev, updateFullscreenUI);
                 });
-                window.addEventListener('resize', updateFullscreenUI);
-                window.addEventListener('orientationchange', updateFullscreenUI);
-
-                // Fullscreen HUD action listeners
-                const hudTimerToggle = document.getElementById('fs-btn-timer-toggle');
-                if (hudTimerToggle) hudTimerToggle.addEventListener('click', toggleTimer);
-
-                const hudTimerReset = document.getElementById('fs-btn-timer-reset');
-                if (hudTimerReset) hudTimerReset.addEventListener('click', resetTimer);
-
-                const hudSwap = document.getElementById('fs-btn-swap');
-                if (hudSwap) hudSwap.addEventListener('click', swapSides);
-
-                const hudUndo = document.getElementById('fs-btn-undo');
-                if (hudUndo) hudUndo.addEventListener('click', handleUndo);
-
-                const hudSave = document.getElementById('fs-btn-save');
-                if (hudSave) hudSave.addEventListener('click', saveMatchToHistory);
-
-                const hudReset = document.getElementById('fs-btn-reset');
-                if (hudReset) hudReset.addEventListener('click', resetCurrentMatch);
 
                 // Keyboard Shortcuts Modal
-                const shortcutsModal = document.getElementById('shortcuts-modal');
                 document.getElementById('btn-shortcuts').addEventListener('click', () => {
                     shortcutsModal.classList.add('active');
                 });
@@ -2190,7 +1776,6 @@
 
                 // Global Keyboard Handler
                 window.addEventListener('keydown', (e) => {
-                    // Ignore if typing inside input
                     if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
 
                     const key = e.key.toLowerCase();
@@ -2223,7 +1808,8 @@
                         shortcutsModal.classList.toggle('active');
                     } else if (key === 'escape') {
                         shortcutsModal.classList.remove('active');
-                        document.getElementById('confirm-modal').classList.remove('active');
+                        historyModal.classList.remove('active');
+                        confirmModal.classList.remove('active');
                     }
                 });
 
