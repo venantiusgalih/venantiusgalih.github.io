@@ -1,186 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venantius Galih's Homepage</title>
-    <link rel="icon" type="image/png" sizes="192x192" href="img/logo_192x192.png" >
-    <link rel="icon" type="image/png" sizes="48x48" href="img/logo_48x48.png" >
-    <link rel="icon" type="image/png" sizes="32x32" href="img/logo_32x32.png" >
-    <link rel="icon" type="image/png" sizes="16x16" href="img/logo_16x16.png" >
-    <!-- Bulma -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Bulma Tooltips -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma-tooltip/1.0.2/bulma-tooltip.min.css" integrity="sha512-6MPIiuSkfRc7C714afaESji4FB1L5SatRp92mlvuVMWoePyJgGOP++h042ZHYfYdtI1ok4LyRnN7pAeDPIE5zw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Venantius Galih</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="img/logo_192x192.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="img/logo_48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo_32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/logo_16x16.png">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- SimpleBar -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.1/simplebar.min.css" integrity="sha512-rptDreZF629VL73El0GaBEH9tlYEKDJFUr+ysb+9whgSGbwYfGGA61dVtQFL0qC8/SZv/EQFW5JtwEFf+8zKYg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        integrity="sha384-qrALq7+6jBOZIQsNnT6xGkMDru64qD6uTlDra39xrt2SoXl4pO3FX6Roz/RpR/BS" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <!-- Bulma -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/flow.min.css">
     <link rel="stylesheet" href="css/personal.min.css">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2JZC0CFWT"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-P2JZC0CFWT');
-    </script>
+    <link rel="stylesheet" href="css/background.min.css">
+    <link rel="stylesheet" href="css/custom-scrollbar.min.css">
 </head>
+
 <body>
-    <!-- class body-all for enabling overlay scroll for all content in page -->
-    <div class="body-all" data-simplebar data-simplebar-auto-hide="true">
-        <div id="flow" class="is-hidden-touch">
-            <span class="flow-1"></span>
-            <span class="flow-2"></span>
-            <span class="flow-3"></span>
+    <!-- Header -->
+    <header class="section container site-header">
+        <div class="desc">
+            <div class="header-meta">
+                <!--
+                <span class="tag is-success is-light availability-status">
+                    <span class="availability-dot" aria-hidden="true"></span>
+                    OPEN TO NEW OPPORTUNITIES
+                </span>
+                <span class="header-divider" aria-hidden="true">|</span>
+                -->
+                <span class="header-meta-item">Working at <a href="https://nawatech.co" target="_blank" rel="noopener noreferrer"><strong>Nawatech</strong></a></span>
+                <span class="header-divider" aria-hidden="true">|</span>
+                <span class="header-meta-item"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Indonesia &middot; UTC+7</span>
+            </div>
         </div>
-        <!-- Section -->
-        <section class="hero is-fullheight">
-            <div class="hero-body">
-                <div class="container">
-                    <p>Hello World! I am</p>
-                    <h1 class="title is-size-1">
-                        Venantius Galih
-                    </h1>
-                    <h3 class="subtitle is-size-4">
-                        Software Developer | Data Engineer
-                    </h3>
-                    <p class="is-hidden">Featured Skills:</p>
-                    <ul class="buttons has-addons skills">
-                        <li>
-                            <a href="https://azure.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Microsoft Azure">
-                                <img src="img/azure.svg" alt="azure-icon" width="16px">
-                                <span class="is-hidden"> Microsoft Azure</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://databricks.com/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Databricks">
-                                <img src="img/databricks.svg" alt="databricks-icon" width="16px">
-                                <span class="is-hidden"> Databricks</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.python.org/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Python">
-                                <img src="img/python.svg" alt="python-icon" width="16px">
-                                <span class="is-hidden"> Python</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://powerbi.microsoft.com/" target="_blank" class="button is-medium is-white has-tooltip" data-tooltip="Microsoft Power BI">
-                                <img src="img/powerbi.svg" alt="powerbi-icon" width="16px">
-                                <span class="is-hidden"> Power BI</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="is-hidden">Contacts:</p>
-                    <div class="buttons has-addons contacts">
-                        <a href="https://www.linkedin.com/in/venantiusgalih" target="_blank" class="button is-link is-outlined is-info">
-                            <span class="icon"><i class="fab fa-linkedin-in"></i></span>
-                            <span>LinkedIn</span></a> <!-- /a inserted in the end of span because of spacing issue -->
-                        <span class="is-hidden">&nbsp;|&nbsp;</span>
-                        <a href="https://github.com/venantiusgalih/" target="_blank" class="button is-link is-outlined is-info">
-                            <span class="icon"><i class="fab fa-github"></i></span>
-                            <span>Github</span></a>
-                        <span class="is-hidden">&nbsp;|&nbsp;</span>
-                        <a href="score/" class="button is-link is-outlined is-danger" title="Open Scoreboard">
-                            <span class="icon"><i class="fas fa-trophy"></i></span>
-                            <span>Scoreboard</span></a>
-                    </div>
-                    <div class="content">
-                        <p>
-                            Feel free to check my profile on <a href="https://glints.com/id/profile/public/527c86ed-34e5-4304-beed-5496a4b82bd6" target="_blank">Glints</a> 
-                            and <span class="has-text-weight-semibold">find me</span> on <a href="https://kalibrr.com" target="_blank">Kalibrr</a>.
-                        </p>
-                        <br>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Skills-->
-        <div class="section">
-            <div class="container">
-                <h3 class="is-hidden">Tech</h3>
-                <ul class="columns is-multiline is-gapless tech is-vcentered">
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://azure.microsoft.com" target="_blank">
-                            <img src="img/azure.svg" alt="azure-icon" width="16px">
-                            <span class="title is-size-5">Microsoft Azure</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>Cloud Platform</span>
-                        </a>
-                    </li>
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://azure.microsoft.com/en-us/products/machine-learning" target="_blank">
-                            <img src="img/azure-ml.svg" alt="azure-ml-icon" width="16px">
-                            <span class="title is-size-5">Azure ML</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>Cloud Platform</span>
-                        </a>
-                    </li>
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://databricks.com" target="_blank">
-                            <img src="img/databricks.svg" alt="databricks-icon" width="16px">
-                            <span class="title is-size-5">Databricks</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>Cloud Platform</span>
-                        </a>
-                    </li>
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://python.org" target="_blank">
-                            <img src="img/python.svg" alt="python-icon" width="16px">
-                            <span class="title is-size-5">Python</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>Programming Language</span>
-                        </a>
-                    </li>
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://powerbi.microsoft.com" target="_blank">
-                            <img src="img/powerbi.svg" alt="powerbi-icon" width="16px">
-                            <span class="title is-size-5">Microsoft Power BI</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>Business Inteligent Tools</span>
-                        </a>
-                    </li>
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://fastapi.tiangolo.com/" target="_blank">
-                            <img src="img/fastapi.svg" alt="fastapi-icon" width="16px">
-                            <span class="title is-size-5">FastAPI</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>Python Framework</span>
-                        </a>
-                    </li>
-                    <li class="column is-half-tablet is-one-quarter-widescreen">
-                        <a href="https://bulma.io/" target="_blank">
-                            <img src="img/bulma.svg" alt="bulma-icon" width="16px">
-                            <span class="title is-size-5">Bulma</span>
-                            <span class="is-hidden">&nbsp;-&nbsp;</span>
-                            <span>CSS Framework</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <br>
+        <div class="action">
+            <button id="theme-toggle" class="button is-text is-small theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"
+                title="Switch to dark mode">
+                <span class="theme-toggle-label">Dark mode</span>
+            </button>
         </div>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>
-                    <a href="https://bulma.io" target="_blank">
-                        <img src="img/made-with-bulma--semiblack.png" alt="Made with Bulma" width="256">
-                    </a>
-                </p>
-                Using the <a href="https://github.com/CreativeBulma/bulma-tooltip/" target="_blank">Bulma Extensions Tooltip</a> 
-                and <a href="https://grsmto.github.io/simplebar/" target="_blank">SimpleBar</a>.
-                Hosted in <a href="https://pages.github.com" target="_blank">Github Pages</a>.
-                &bull; <a href="score/">Scoreboard</a>
+    </header>
+    <!-- Section -->
+    <section class="section container">
+        <div class="content">
+            <p>// SUBJECT</p>
+            <h1 class="title is-size-3">
+                <span class="intro-name-primary">Venantius Galih</span>
+                <span class="intro-name-secondary"> / venantiusgalih.com</span>
+            </h1>
+            <h2 class="subtitle is-size-5">Software and data engineer focused on RestAPI, database systems, and data ingestion. Learning AI automation and exploring DataOps workflows.</h2>
+            <ul class="tags featured-skills" aria-label="Featured skills">
+                <li class="tag is-medium"><span class="skill-hash" aria-hidden="true">#</span>&nbsp;Python / FastAPI</li>
+                <li class="tag is-medium"><span class="skill-hash" aria-hidden="true">#</span>&nbsp;PostgreSQL</li>
+                <li class="tag is-medium"><span class="skill-hash" aria-hidden="true">#</span>&nbsp;Azure</li>
+            </ul>
+
+        </div>
+        <div class="content">
+            <p>// PROJECTS</p>
+            <p>View my portfolio on <a href="https://github.com/venantiusgalih" target="_blank"><i class="fab fa-github"></i> GitHub</a>.</p>
+        </div>
+        <div class="content">
+            <p>// EXPERIENCE</p>
+            <ul class="experience-list">
+                <li>
+                    <div class="level experience-heading">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <div class="experience-role">Data &amp; AI Lead <span>@ Nawatech</span></div>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <p class="experience-date" data-start="2023-01" data-end="now">
+                                    <span class="experience-range">2023 - Present</span>
+                                    <span class="experience-duration">&bull; 3+ Years</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Lead the Data &amp; AI team and oversee work in data warehouse orchestration, data ingestion, and AI/ML solutions.</p>
+                </li>
+                <li>
+                    <div class="level experience-heading">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <div class="experience-role">Data Engineer <span>@ Nawatech</span></div>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <p class="experience-date" data-start="2018-08" data-end="2023-01">
+                                    <span class="experience-range">2018 - 2023</span>
+                                    <span class="experience-duration">&bull; 4+ Years</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Built and maintained data pipelines, managed databases, and handled reporting.</p>
+                </li>
+                <li>
+                    <div class="level experience-heading">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <div class="experience-role">Application Developer <span>@ Multipolar</span></div>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <p class="experience-date" data-start="2017-05" data-end="2018-07">
+                                    <span class="experience-range">2017 - 2018</span>
+                                    <span class="experience-duration">&bull; 1+ Years</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Worked with COBOL and RPG on AS/400 systems.</p>
+                </li>
+                <li>
+                    <div class="level experience-heading">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <div class="experience-role">Internship <span>@ Multipolar</span></div>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <p class="experience-date" data-start="2016-08" data-end="2016-10">
+                                    <span class="experience-range">2016</span>
+                                    <span class="experience-duration">&bull; 3 Months</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Developed applications using JSP, Struts 2, and Hibernate.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <p>// STACK &amp; TOOLING</p>
+            <ul class="grid is-col-min-12 stack-tooling-list">
+                <li class="cell">
+                    <span>CORE STACKS</span>
+                    <p>Python / FastAPI</p>
+                </li>
+                <li class="cell">
+                    <span>DATA</span>
+                    <p>SQL Server, PostgreSQL, MongoDB, Elasticsearch, OpenSearch, Airflow</p>
+                </li>
+                <li class="cell">
+                    <span>CLOUD</span>
+                    <p>Azure Data Factory, Azure OpenAI, Microsoft Power BI, Microsoft Fabric, Microsoft Foundry, Databricks</p>
+                </li>
+                <li class="cell">
+                    <span>INFRA</span>
+                    <p>Docker, Portainer, Kubernetes, Bitbucket, Proxmox, TrueNAS</p>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <p>// CONNECT</p>
+            <p>Connect with me on <a href="https://www.linkedin.com/in/venantiusgalih" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>.</p>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <div>
+                Built with <a href="https://bulma.io" target="_blank">Bulma</a>
             </div>
-        </footer>
-    </div>
+            <div>
+                Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
+            </div>
+        </div>
+    </footer>
     <!-- Script -->
-    <!-- SimpleBar -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.1/simplebar.min.js" integrity="sha512-pnw039YCj58sPbPxVAzem8Z3dTgRgq0n6QJZDc+3PV2ScytsX6Jx0pMiLZRYofXshu4ChX6/rFFgebHQtK4UoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/dark-mode-toggle.min.js" defer></script>
+    <script src="js/custom-scrollbar.min.js" defer></script>
+    <script src="js/experience-duration.min.js" defer></script>
 </body>
+
 </html>
